@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose;
+const { ObjectId } = mongoose.Types;
 const FoodsSchema = new mongoose.Schema(
   {
     name: String,
@@ -10,17 +10,18 @@ const FoodsSchema = new mongoose.Schema(
     rating: Number,
     info: String,
     menuID: ObjectId,
+     
   },
   {
     timestamps: true,
   } 
 );
 
-FoodsSchema.pre("save", (next) => {
-  if (!this.isNew) {
-    this.updatedAt = Date.now();
-  }
-  next();
-});
+// FoodsSchema.pre("save", (next) => {
+//   if (!this.isNew) {
+//     this.updatedAt = Date.now();
+//   }
+//   next();
+// });
 
 module.exports = mongoose.model("Foods", FoodsSchema);

@@ -1,4 +1,5 @@
 const Koa = require("koa");
+const bodyparser = require("koa-bodyparser");
 const connectDB = require("./helper/mongoose");
 const middleware = require("./helper/middleware");
 const router = require("./helper/router");
@@ -10,6 +11,7 @@ const app = new Koa();
 
  
 
+app.use(bodyparser());
 app.use(middleware.response());
 app.use( router.routes());
 

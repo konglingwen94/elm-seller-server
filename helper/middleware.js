@@ -1,16 +1,15 @@
 module.exports = {
-   response() {
+  response() {
     return async (ctx, next) => {
       try {
         var results = await next();
-        console.log(results);
       } catch (error) {
-        ctx.body = error;
-        return
-        // ctx.body = { message: error.message };
+        // console.dir(error);
+        ctx.status = error.status || 500;
+        ctx.body = { message: error.message,stack:error.stack };
+        return;
       }
       ctx.body = results;
     };
   },
-  
 };

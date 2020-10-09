@@ -25,6 +25,7 @@ const RatingSchema = new mongoose.Schema(
     score: {
       type: Number,
     },
+    foodID: [{ type: mongoose.Types.ObjectId, ref: "Food" }],
     recommend: [String],
   },
   {
@@ -32,11 +33,11 @@ const RatingSchema = new mongoose.Schema(
   }
 );
 
-RatingSchema.pre("save", (next) => {
-  if (!this.isNew) {
-    this.updatedAt = Date.now();
-  }
-  next();
-});
+// RatingSchema.pre("save", (next) => {
+//   if (!this.isNew) {
+//     this.updatedAt = Date.now();
+//   }
+//   next();
+// });
 
-module.exports =  mongoose.model("Rating", RatingSchema);
+module.exports = mongoose.model("Rating", RatingSchema);
