@@ -1,14 +1,9 @@
-const express = require("express");
-const FoodsModel = require("../model/foods");
-const MenuModel = require("../model/menu");
-const RatingModel = require("../model/rating");
-const SellerModel = require("../model/seller");
-const router = express.Router();
+const Router = require("koa-router");
+const router = new Router({prefix:'/api'});
 
-router.get("/test", (req, res) => {
-  console.log(req.path);
+const FoodsController = require("../controller/foods");
+ 
 
-  res.json("elm-seller");
-});
+router.get("/foods", FoodsController.queryList);
 
 module.exports = router;
