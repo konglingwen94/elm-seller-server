@@ -4,6 +4,7 @@ const router = new Router({ prefix: "/api" });
 const FoodsController = require("../controller/foods");
 const menuController = require("../controller/menu");
 const ratingController = require("../controller/rating");
+const sellerController = require("../controller/seller");
 
 router.delete("/foods", FoodsController.deleteOne);
 router.post("/foods", FoodsController.createOne);
@@ -17,6 +18,11 @@ router.delete("/menus/:id", menuController.deleteOne);
 router.post("/menus/:id", menuController.updateOne);
 
 
+
+
 router.delete('/ratings/:id',ratingController.deleteOne)
 router.get('/ratings',ratingController.queryList)
 module.exports = router;
+
+
+router.get('/seller',sellerController.queryOne)

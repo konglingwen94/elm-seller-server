@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const RatingSchema = new mongoose.Schema(
   {
+    rateType: {
+      type: Number,
+      required: true,
+    },
     username: {
       type: String,
       required: true,

@@ -10,7 +10,7 @@ const FoodsSchema = new mongoose.Schema(
     rating: Number,
     info: String,
     menuID: ObjectId,
-     
+    image:String
   },
   {
     timestamps: true,
