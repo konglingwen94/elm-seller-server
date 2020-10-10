@@ -19,7 +19,7 @@ connectDB().then(() => {
   if (process.env.NODE_ENV !== "production") {
     console.clear();
   }
-  app.listen(3000, () => {
-    console.log("Server is listening on http://localhost:3000");
+  app.listen(6000, () => {
+    console.log("Server is listening on http://localhost:6000");
   });
 });

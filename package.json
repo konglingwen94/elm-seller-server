@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon  app.js",
-    "dev:debug": "nodemon --inspect  app.js"
+    "dev:debug": "nodemon --inspect  app.js",
+    "start":"pm2 start --name=elm-seller-server app.js"
   },
   "keywords": [],
   "author": "",

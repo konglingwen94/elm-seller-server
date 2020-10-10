@@ -1,28 +1,32 @@
-name: SSH Server Deploy
+name: Deploy files
 on: [push]
 jobs:
+
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-   
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup SSH
-        uses: MrSquaare/ssh-setup-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          private-key: ${{ secrets.SERVER_SSH_KEY }}
-      - name: SSH Server Deploy
-        uses: kostya-ten/ssh-server-deploy@v3
-        with:
-         
-         
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          scp_source: /*
-          scp_target: ${{ secrets.SCP_TARGET }}
-          before_script: |
-            
-          after_script: |
-            npm install
+    - uses: actions/checkout@master
+    - name: copy file via ssh key
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: ${{ secrets.SERVER_PORT }}
+        source: "*"
+        target: "/var/www/elm-seller-server"
+
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: "22"
+        script: |
+          cd /var/www/elm-seller-server
+          npm install
+          
+          pm2 reload elm-seller-server
+          

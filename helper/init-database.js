@@ -8,6 +8,22 @@ const seller = require("../data/seller").data;
 let ratings = require("../data/ratings").data;
 const connectDB = require("./mongoose");
 
+if (typeof Array.prototype.flat !== "function") {
+  Array.prototype.flat = function _flat(arr) {
+    arr=this
+    let newArr = [];
+    arr.forEach((item) => {
+      if (Array.isArray(item)) {
+        newArr = newArr.concat(arguments.callee(item));
+      } else {
+        newArr.push(item);
+      }
+    });
+    return newArr;
+  };
+}
+
+
 ratings = ratings.map((item) => {
   return {
     ...item,
@@ -38,6 +54,7 @@ const foods = goods.data
     return item.foods;
   })
   .flat();
+
 
 // console.log(foods.length);
 
