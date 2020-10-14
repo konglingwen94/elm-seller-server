@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon  app.js",
     "dev:debug": "nodemon --inspect  app.js",
-    "start":"pm2 start --name=elm-seller-server app.js --log-date-format 'DD-MM HH:mm:ss.SSS'"
+    "start": "pm2 start --name=elm-seller-server app.js --log-date-format 'DD-MM HH:mm:ss.SSS'"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.4.0",
+    "koa-static": "^5.0.0",
     "mongoose": "^5.10.7"
   },
   "devDependencies": {
