@@ -17,12 +17,10 @@ router.get("/menus", menuController.queryList);
 router.delete("/menus/:id", menuController.deleteOne);
 router.post("/menus/:id", menuController.updateOne);
 
+router.delete("/ratings/:id", ratingController.deleteOne);
+router.get("/ratings", ratingController.queryList);
+
+router.get("/seller", sellerController.queryOne);
 
 
-
-router.delete('/ratings/:id',ratingController.deleteOne)
-router.get('/ratings',ratingController.queryList)
 module.exports = router;
-
-
-router.get('/seller',sellerController.queryOne)

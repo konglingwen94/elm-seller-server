@@ -9,12 +9,12 @@ let ratings = require("../data/ratings").data;
 const connectDB = require("./mongoose");
 
 if (typeof Array.prototype.flat !== "function") {
-  Array.prototype.flat = function _flat(arr) {
-    arr=this
+  Array.prototype.flat = function _flat() {
     let newArr = [];
-    arr.forEach((item) => {
+
+    this.forEach((item) => {
       if (Array.isArray(item)) {
-        newArr = newArr.concat(arguments.callee(item));
+        newArr = newArr.concat(item.flat());
       } else {
         newArr.push(item);
       }
@@ -22,7 +22,6 @@ if (typeof Array.prototype.flat !== "function") {
     return newArr;
   };
 }
-
 
 ratings = ratings.map((item) => {
   return {
@@ -55,8 +54,7 @@ const foods = goods.data
   })
   .flat();
 
-
-// console.log(foods.length);
+ 
 
 connectDB()
   .then(() => {
