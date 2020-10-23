@@ -28,5 +28,5 @@ jobs:
           cd /var/www/elm-seller-server
           npm install
           
-          npm restart
+          npm start
           
