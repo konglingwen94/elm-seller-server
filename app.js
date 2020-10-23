@@ -5,18 +5,29 @@ const connectDB = require("./helper/mongoose");
 const middleware = require("./helper/middleware");
 const router = require("./helper/router");
 
+const parameter = require('koa-parameter');
+
+ 
+
+
+
 const app = new Koa();
+const PORT = 5000;
 
 app.use(static('./public/web'));
 app.use(bodyparser());
+app.use(parameter(app)); // also add a middleware to catch the error.
+
+
 app.use(middleware.response());
-app.use(router.routes());
+app.use(router.routes() );
+app.use(router.allowedMethods() );
+
 
 connectDB().then(() => {
   if (process.env.NODE_ENV !== "production") {
     console.clear();
   }
-  const PORT = 5000;
   app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
   });

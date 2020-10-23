@@ -1,0 +1,20 @@
+{
+  "menu": {
+    "name": "string",
+    "type": "int"
+  },
+  "foods": {
+    "name": "string",
+    "price": "number",
+    "oldPrice": "number",
+    "description": "string",
+    "sellCount": "number",
+    "rating": {
+      "type": "int",
+      "required": true
+    },
+    "info": "string",
+    "menuID": "string?",
+    "image": "string"
+  }
+}

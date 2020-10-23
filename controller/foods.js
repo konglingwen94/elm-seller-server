@@ -1,8 +1,12 @@
 const FoodsModel = require("../model/foods");
 const RatingModel = require("../model/rating");
+// const validateRules = require("../helper/validatorRules").foods;
+
+ 
 module.exports = {
   queryList() {
     var results = FoodsModel.find();
+     
 
     return results;
   },
@@ -16,12 +20,14 @@ module.exports = {
     result.ratings = ratings;
     return result;
   },
-  async createOne() {
-    return FoodsModel.create(ctx.body);
+  async createOne(ctx,next) {
+     
+   
+    return FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {
     const { id } = ctx.params;
-    const payload = ctx.body;
+    const payload = ctx.request.body;
     return FoodsModel.findByIdAndUpdate(id, payload);
   },
   async deleteOne(ctx) {

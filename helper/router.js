@@ -5,9 +5,13 @@ const FoodsController = require("../controller/foods");
 const menuController = require("../controller/menu");
 const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
+const middleware = require("./middleware");
+
+router.use(middleware.verifyParams())
+
 
 router.delete("/foods", FoodsController.deleteOne);
-router.post("/foods", FoodsController.createOne);
+router.post('foods',"/foods", FoodsController.createOne);
 router.post("/foods/:id", FoodsController.updateOne);
 router.get("/foods", FoodsController.queryList);
 router.get("/foods/:id", FoodsController.queryById);
