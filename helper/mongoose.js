@@ -3,7 +3,7 @@ const defaultConfig = require("../config/config.default.json");
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    const { database,host, port, username, password } = defaultConfig;
+    const { database, host, port, username, password } = defaultConfig;
 
     let URI = `mongodb://`;
 
@@ -13,9 +13,7 @@ module.exports = () => {
 
     URI += `${host}/${database}`;
 
-
-
-    mongoose.connect(URI, () => {
+    mongoose.connect(URI, { useUnifiedTopology: true }, () => {
       resolve();
       console.log(`Database is connecting at ${URI}`);
     });
