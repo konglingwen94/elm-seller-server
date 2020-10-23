@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon  app.js",
     "dev:debug": "nodemon --inspect  app.js",
-    "start": "pm2 start --name=elm-seller-server app.js --log-date-format 'DD-MM HH:mm:ss.SSS'"
+    "start": "pm2 start  --env production"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "mongoose": "^5.10.7"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "nodemon": "^2.0.4"
   }
 }

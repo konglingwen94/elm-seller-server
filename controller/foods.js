@@ -22,7 +22,7 @@ module.exports = {
   },
   async createOne(ctx,next) {
      
-   
+   abc
     return FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {

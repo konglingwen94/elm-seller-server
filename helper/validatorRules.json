@@ -14,7 +14,7 @@
       "required": true
     },
     "info": "string",
-    "menuID": "string?",
+    "menuID": "string",
     "image": "string"
   }
 }

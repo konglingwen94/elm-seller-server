@@ -12,7 +12,7 @@ const parameter = require('koa-parameter');
 
 
 const app = new Koa();
-const PORT = 5000;
+const PORT = process.env.PORT;
 
 app.use(static('./public/web'));
 app.use(bodyparser());
@@ -23,6 +23,7 @@ app.use(middleware.response());
 app.use(router.routes() );
 app.use(router.allowedMethods() );
 
+console.log(process.env.NODE_ENV);
 
 connectDB().then(() => {
   if (process.env.NODE_ENV !== "production") {

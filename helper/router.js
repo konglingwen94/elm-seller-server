@@ -7,7 +7,7 @@ const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
 const middleware = require("./middleware");
 
-router.use(middleware.verifyParams())
+// router.use(middleware.verifyParams())
 
 
 router.delete("/foods", FoodsController.deleteOne);
