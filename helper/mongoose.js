@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const defaultConfig = require("../config/config.default.json");
+const defaultConfig = require("../ecosystem.config").env.mongoose;
+// const defaultConfig = require("../config/config.default.json");
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
@@ -13,7 +14,7 @@ module.exports = () => {
 
     URI += `${host}/${database}`;
 
-    mongoose.connect(URI, { useUnifiedTopology: true }, () => {
+    mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
       resolve();
       console.log(`Database is connecting at ${URI}`);
     });
