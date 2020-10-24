@@ -4,17 +4,17 @@
     "type": "int"
   },
   "foods": {
-    "name": "string",
-    "price": "number",
-    "oldPrice": "number",
-    "description": "string",
-    "sellCount": "number",
-    "rating": {
-      "type": "int",
-      "required": true
+    "name": {
+      "type": "string",
+      "required":false
+    }, 
+    "price": {
+      "type": "number",
+      "required":false
     },
-    "info": "string",
-    "menuID": "string",
-    "image": "string"
+    "oldPrice": {
+      "type": "number",
+      "required":false
+    }
   }
 }

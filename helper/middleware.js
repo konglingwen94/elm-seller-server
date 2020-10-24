@@ -1,29 +1,56 @@
 const validateRules = require("./validatorRules");
-function pick(source, fields) {
-  const result = {};
-  fields.forEach((field) => {
-    if (source.hasOwnProperty(field)) {
-      result[field] = source[field];
-    }
+ 
+function copy(source) {
+  const obj = {};
+  Object.keys(source).forEach((key) => {
+    obj[key] = typeof source[key] === "object" ? copy(source[key]) : source[key];
+    
   });
-  return result;
+  return obj;
 }
-
 module.exports = {
-  verifyParams() {
+  verifyParams(opts = {}) {
+    const { ruleName, required } = opts;
+
+    if (!validateRules.hasOwnProperty(ruleName)) {
+      throw new Error(`Not Found ruleName ${ruleName}`);
+    }
+     
+
+    const rules = copy(validateRules[ruleName]);
+    if (Array.isArray(required)) {
+      required.forEach((key) => {
+        if (rules.hasOwnProperty(key)) {
+           
+
+          rules[key].required = true;
+        }
+      });
+    }
+   
+
     return (ctx, next) => {
-      const routerName = ctx._matchedRouteName;
+      if (!rules) return next();
 
-      const schema = routerName && validateRules[routerName];
-
-      if (typeof schema === "object") {
-        ctx.verifyParams(schema);
-        ctx.request.body = pick(ctx.request.body, Object.keys(schema));
-      }
-
+      ctx.verifyParams(rules);
       return next();
+       
     };
   },
+  // _verifyParams() {
+  //   return (ctx, next) => {
+  //     const routerName = ctx._matchedRouteName;
+
+  //     const schema = routerName && validateRules[routerName];
+
+  //     if (typeof schema === "object") {
+  //       ctx.verifyParams(schema);
+  //       ctx.request.body = pick(ctx.request.body, Object.keys(schema));
+  //     }
+
+  //     return next();
+  //   };
+  // },
   response() {
     return async (ctx, next) => {
       try {

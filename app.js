@@ -12,7 +12,7 @@ const parameter = require('koa-parameter');
 
 
 const app = new Koa();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.use(static('./public/web'));
 app.use(bodyparser());
@@ -27,7 +27,7 @@ console.log(process.env.NODE_ENV);
 
 connectDB().then(() => {
   if (process.env.NODE_ENV !== "production") {
-    console.clear();
+    // console.clear();
   }
   app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
