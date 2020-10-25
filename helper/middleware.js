@@ -37,20 +37,7 @@ module.exports = {
        
     };
   },
-  // _verifyParams() {
-  //   return (ctx, next) => {
-  //     const routerName = ctx._matchedRouteName;
-
-  //     const schema = routerName && validateRules[routerName];
-
-  //     if (typeof schema === "object") {
-  //       ctx.verifyParams(schema);
-  //       ctx.request.body = pick(ctx.request.body, Object.keys(schema));
-  //     }
-
-  //     return next();
-  //   };
-  // },
+  
   response() {
     return async (ctx, next) => {
       try {
