@@ -1,10 +1,9 @@
 const validateRules = require("./validatorRules");
- 
+
 function copy(source) {
   const obj = {};
   Object.keys(source).forEach((key) => {
     obj[key] = typeof source[key] === "object" ? copy(source[key]) : source[key];
-    
   });
   return obj;
 }
@@ -15,29 +14,24 @@ module.exports = {
     if (!validateRules.hasOwnProperty(ruleName)) {
       throw new Error(`Not Found ruleName ${ruleName}`);
     }
-     
 
     const rules = copy(validateRules[ruleName]);
     if (Array.isArray(required)) {
       required.forEach((key) => {
         if (rules.hasOwnProperty(key)) {
-           
-
           rules[key].required = true;
         }
       });
     }
-   
 
     return (ctx, next) => {
       if (!rules) return next();
 
       ctx.verifyParams(rules);
       return next();
-       
     };
   },
-  
+
   response() {
     return async (ctx, next) => {
       try {

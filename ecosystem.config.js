@@ -2,7 +2,6 @@ module.exports = {
   name: "elm-seller-server",
   script: "./app.js",
   log_date_format: "YYYY-MM-DD HH:mm:ss.SSS",
-  //   watch: true,
   env: {
     PORT: 5000,
     NODE_ENV: "development",
@@ -15,7 +14,6 @@ module.exports = {
     },
   },
   env_production: {
-    // "PORT": 5000,
     NODE_ENV: "production",
   },
 };
