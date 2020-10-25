@@ -7,18 +7,17 @@ const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
 const middleware = require("./middleware");
 
- 
 // 商品
-router.delete("/foods", FoodsController.deleteOne);
+router.delete("/foods/:id", FoodsController.deleteOne);
 router.post(
   "/foods",
   middleware.verifyParams({ required: ["name", "price", "oldPrice"], ruleName: "foods" }),
   FoodsController.createOne
 );
- 
+
 router.patch(
   "/foods/:id",
-  middleware.verifyParams({ required: ["name", 'price',"oldPrice", ], ruleName: "foods" }),
+  middleware.verifyParams({ ruleName: "foods" }),
 
   FoodsController.updateOne
 );
@@ -27,10 +26,20 @@ router.get("/foods/:id", FoodsController.queryById);
 
 // 商品菜单
 
-router.post("/menus", menuController.createOne);
+router.post(
+  "/menus",
+
+  middleware.verifyParams({ required: ["name", "type"], ruleName: "menus" }),
+
+  menuController.createOne
+);
 router.get("/menus", menuController.queryList);
 router.delete("/menus/:id", menuController.deleteOne);
-router.post("/menus/:id", menuController.updateOne);
+router.patch(
+  "/menus/:id",
+
+  menuController.updateOne
+);
 
 // 商品评价
 

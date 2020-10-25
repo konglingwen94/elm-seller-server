@@ -62,11 +62,11 @@ module.exports = {
 │   ├── menu.js
 │   └── foods.js
 ├── helper  
-│   ├── validatorRules.json
-│   ├── router.js
-│   ├── mongoose.js
-│   ├── middleware.js
-│   └── init-database.js
+│   ├── validatorRules.json  // 参数验证规则
+│   ├── router.js  // 路由配置
+│   ├── mongoose.js  // mongoose连接脚本
+│   ├── middleware.js // 项目中间件
+│   └── init-database.js  // 初始化数据库脚本
 ├── data // 数据库初始化数据，在向服务器添加数据之前可一次性初始化数据用于前端项目的展示
 │   ├── seller.json
 │   ├── ratings.json
