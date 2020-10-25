@@ -1,7 +1,7 @@
 # elm-seller-server
 饿了么商家店铺项目的后端接口项目
 
-本项目是为前端项目<https://github.com/konglingwen94/vue-seller-server>提供数据`API`服务的后端项目。
+本项目是为前端项目<https://github.com/konglingwen94/vue-elm-sell>提供数据`API`服务的后端项目。
 
 运行此项目之前需要安装`node^10.x.x`和`mongodb^4.x`
 
