@@ -4,11 +4,11 @@ const RatingModel = require("../model/rating");
 
  
 module.exports = {
-  queryList() {
-    var results = FoodsModel.find();
+  async queryList(ctx) {
+    var results =await FoodsModel.find();
      
 
-    return results;
+    ctx.body= results;
   },
   async queryById(ctx) {
     const { id } = ctx.params;
@@ -18,20 +18,20 @@ module.exports = {
     result = result.toObject();
 
     result.ratings = ratings;
-    return result;
+    ctx.body= result;
   },
   async createOne(ctx,next) {
      
   //  abc
-    return FoodsModel.create(ctx.request.body);
+    ctx.body= await FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {
     const { id } = ctx.params;
     const payload = ctx.request.body;
-    return FoodsModel.findByIdAndUpdate(id, payload);
+    ctx.body= await FoodsModel.findByIdAndUpdate(id, payload);
   },
   async deleteOne(ctx) {
     const { id } = ctx.params;
-    return FoodsModel.findByIdAndDelete(id);
+    ctx.body= await FoodsModel.findByIdAndDelete(id);
   },
 };
