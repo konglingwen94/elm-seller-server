@@ -57,9 +57,6 @@ module.exports = {
 
         return;
       }
-// console.log('results',results);
-
-      // ctx.body = results;
     };
   },
 };
