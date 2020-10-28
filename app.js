@@ -19,7 +19,7 @@ app.use(bodyparser());
 app.use(parameter(app)); // also add a middleware to catch the error.
 
 
-app.use(middleware.response());
+app.use(middleware.errorHandler());
 app.use(router.routes() );
 app.use(router.allowedMethods() );
 

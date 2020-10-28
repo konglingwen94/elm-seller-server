@@ -1,8 +1,10 @@
 const MenuModel = require("../model/menu");
 
 module.exports = {
-  queryList() {
-    return MenuModel.find();
+  async queryList(ctx) {
+    const result = await MenuModel.find();
+    console.log("await MenuModel.find()", result);
+    ctx.body = result;
   },
   createOne(ctx) {
     const payload = ctx.body;

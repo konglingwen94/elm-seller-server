@@ -32,10 +32,10 @@ module.exports = {
     };
   },
 
-  response() {
+  errorHandler() {
     return async (ctx, next) => {
       try {
-        var results = await next();
+        await next();
       } catch (error) {
         ctx.status = error.status || 500;
         // console.dir(error);
@@ -57,8 +57,9 @@ module.exports = {
 
         return;
       }
+// console.log('results',results);
 
-      ctx.body = results;
+      // ctx.body = results;
     };
   },
 };

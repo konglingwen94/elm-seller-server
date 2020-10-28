@@ -29,7 +29,7 @@ router.get("/foods/:id", FoodsController.queryById);
 router.post(
   "/menus",
 
-  middleware.verifyParams({ required: ["name", "type"], ruleName: "menus" }),
+  middleware.verifyParams({ required: ["name", "type"], ruleName: "menu" }),
 
   menuController.createOne
 );
