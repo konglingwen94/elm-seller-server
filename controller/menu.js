@@ -12,7 +12,7 @@ module.exports = {
   },
   async updateOne(ctx) {
     const { id } = ctx.params;
-    const payload = ctx.body;
+    const payload = ctx.request.body;
     ctx.body = await MenuModel.findByIdAndUpdate(id, payload);
   },
   async deleteOne(ctx) {
