@@ -1,11 +1,11 @@
 const RatingModel = require("../model/rating");
 
 module.exports = {
-  queryList() {
-    return RatingModel.find();
+  async queryList(ctx) {
+    ctx.body=await RatingModel.find();
   },
-  deleteOne(ctx) {
+  async deleteOne(ctx) {
     const { id } = ctx.params;
-    return RatingModel.findByIdAndDelete(id);
+    ctx.body=await RatingModel.findByIdAndDelete(id);
   },
 };
