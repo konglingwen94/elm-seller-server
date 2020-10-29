@@ -15,8 +15,12 @@ module.exports = {
       type: "number",
       required: false,
     },
-    oldPrice: {
-      type: "number",
+    info: {
+      type: "string",
+      required: false,
+    },
+    image: {
+      type: "string",
       required: false,
     },
   },

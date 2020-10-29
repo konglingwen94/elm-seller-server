@@ -1,5 +1,6 @@
 const Koa = require("koa");
 const static = require("koa-static");
+const mount = require("koa-mount");
 const bodyparser = require("koa-bodyparser");
 const connectDB = require("./helper/mongoose");
 const middleware = require("./helper/middleware");
@@ -15,6 +16,7 @@ const app = new Koa();
 const PORT = process.env.PORT || 5000;
 
 app.use(static('./public/web'));
+app.use(mount('/admin',static('./public/admin')));
 app.use(bodyparser());
 app.use(parameter(app)); // also add a middleware to catch the error.
 
