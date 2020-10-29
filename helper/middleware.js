@@ -1,7 +1,21 @@
-const validateRules = require("./validatorRules");
+const validateRules = require("./validatorRules.js");
 
 function copy(source) {
-  const obj = {};
+  let obj = {};
+  if (typeof source !== "object") {
+    return obj=source
+    // throw new Error(`传入的参数 ${source} 不是对象类型的值`);
+  }
+
+
+  if (Array.isArray(source)) {
+    obj = [];
+    source.forEach((item, index) => {
+      obj[index] = copy(item);
+    });
+    return obj;
+  }
+
   Object.keys(source).forEach((key) => {
     obj[key] = typeof source[key] === "object" ? copy(source[key]) : source[key];
   });
@@ -16,6 +30,8 @@ module.exports = {
     }
 
     const rules = copy(validateRules[ruleName]);
+    console.log(rules);
+
     if (Array.isArray(required)) {
       required.forEach((key) => {
         if (rules.hasOwnProperty(key)) {

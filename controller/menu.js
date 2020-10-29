@@ -7,8 +7,8 @@ module.exports = {
     ctx.body = result;
   },
   async createOne(ctx) {
-    const payload = ctx.body;
-    ctx.body = await MenuModel.create(payload);
+    const payload = ctx.request.body;
+    ctx.body = (await MenuModel.create(payload));
   },
   async updateOne(ctx) {
     const { id } = ctx.params;
