@@ -30,7 +30,7 @@ module.exports = {
     }
 
     const rules = copy(validateRules[ruleName]);
-    console.log(rules);
+//     console.log(rules);
 
     if (Array.isArray(required)) {
       required.forEach((key) => {

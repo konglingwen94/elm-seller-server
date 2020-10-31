@@ -6,25 +6,20 @@ const connectDB = require("./helper/mongoose");
 const middleware = require("./helper/middleware");
 const router = require("./helper/router");
 
-const parameter = require('koa-parameter');
-
- 
-
-
+const parameter = require("koa-parameter");
 
 const app = new Koa();
 const PORT = process.env.PORT || 5000;
 
-app.use(static('./public/web'));
-app.use(mount('/admin',static('./public/admin')));
+app.use(static("./public/web"));
+app.use(static("./public/uploads"));
+app.use(mount("/admin", static("./public/admin")));
 app.use(bodyparser());
 app.use(parameter(app)); // also add a middleware to catch the error.
 
-
 app.use(middleware.errorHandler());
-app.use(router.routes() );
-app.use(router.allowedMethods() );
-
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 connectDB().then(() => {
   if (process.env.NODE_ENV !== "production") {
