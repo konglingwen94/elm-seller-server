@@ -68,9 +68,9 @@ router.post("/uploads", upload.single("file"), (ctx) => {
   }
 
   // console.log(ctx.req.file);
-
+// debugger
   ctx.body = {
-    path: ctx.req.file.path,
+    path:`/uploads/${ctx.req.file.filename}`,
   };
 });
 

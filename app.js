@@ -11,8 +11,10 @@ const parameter = require("koa-parameter");
 const app = new Koa();
 const PORT = process.env.PORT || 5000;
 
+// app.use(static("./public"));
 app.use(static("./public/web"));
-app.use(static("./public/uploads"));
+// app.use(static("./public/uploads"));
+app.use(mount("/uploads", static("./public/uploads")));
 app.use(mount("/admin", static("./public/admin")));
 app.use(bodyparser());
 app.use(parameter(app)); // also add a middleware to catch the error.
