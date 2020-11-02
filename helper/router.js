@@ -21,7 +21,7 @@ const upload = multer({ storage: storage });
 router.delete("/foods/:id", FoodsController.deleteOne);
 router.post(
   "/foods",
-  middleware.verifyParams({ required: ["name", "price", "oldPrice"], ruleName: "foods" }),
+  middleware.verifyParams({ required: ["name", "price", "oldPrice",'image'], ruleName: "foods" }),
   FoodsController.createOne
 );
 

@@ -3,7 +3,7 @@ const validateRules = require("./validatorRules.js");
 function copy(source) {
   let obj = {};
   if (typeof source !== "object") {
-    return obj=source
+    return source
     // throw new Error(`传入的参数 ${source} 不是对象类型的值`);
   }
 
