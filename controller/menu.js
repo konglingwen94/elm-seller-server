@@ -2,8 +2,8 @@ const MenuModel = require("../model/menu");
 
 module.exports = {
   async queryList(ctx) {
-    const result = await MenuModel.find();
-    // console.log("await MenuModel.find()", result);
+    const result = await MenuModel.find().sort({createdAt:-1});
+    
     ctx.body = result;
   },
   async createOne(ctx) {
@@ -14,8 +14,7 @@ module.exports = {
     } catch (error) {
       throw error;
     }
-    console.log("result", result);
-
+     
     if (result) {
       ctx.status=400
       return (ctx.body = { message: "重复的名称" });
@@ -26,6 +25,8 @@ module.exports = {
     const { id } = ctx.params;
     const payload = ctx.request.body;
 
+
+    
     ctx.body = await MenuModel.findByIdAndUpdate(id, payload);
   },
   async deleteOne(ctx) {
