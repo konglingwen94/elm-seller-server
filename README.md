@@ -11,6 +11,8 @@
 
 前端项目：<https://github.com/konglingwen94/vue-elm-sell>
 
+管理后台: <https://github.com/konglingwen94/vue-seller-admin>
+
 ## 安装
 
 ```bash
