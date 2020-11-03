@@ -1,14 +1,28 @@
 const FoodsModel = require("../model/foods");
 const RatingModel = require("../model/rating");
-// const validateRules = require("../helper/validatorRules").foods;
+const { resolveFilterOptions, resolvePagination } = require("../helper/utils");
 
- 
 module.exports = {
   async queryList(ctx) {
-    var results =await FoodsModel.find();
-     
+    const { page, pageSize } = resolvePagination({ page: ctx.query.page, pageSize: ctx.query.pageSize });
 
-    ctx.body= results;
+    const { skip, limit, sort } = resolveFilterOptions({ page, pageSize });
+
+    const total = await FoodsModel.countDocuments();
+
+    var results = await FoodsModel.find()
+      .sort(sort)
+      .skip(skip)
+      .limit(limit);
+
+    ctx.body = {
+      data: results,
+      total,
+      pagination: {
+        page,
+        pageSize,
+      },
+    };
   },
   async queryById(ctx) {
     const { id } = ctx.params;
@@ -18,20 +32,19 @@ module.exports = {
     result = result.toObject();
 
     result.ratings = ratings;
-    ctx.body= result;
+    ctx.body = result;
   },
-  async createOne(ctx,next) {
+  async createOne(ctx, next) {
      
-  //  abc
-    ctx.body= await FoodsModel.create(ctx.request.body);
+    ctx.body = await FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {
     const { id } = ctx.params;
     const payload = ctx.request.body;
-    ctx.body= await FoodsModel.findByIdAndUpdate(id, payload);
+    ctx.body = await FoodsModel.findByIdAndUpdate(id, payload);
   },
   async deleteOne(ctx) {
     const { id } = ctx.params;
-    ctx.body= await FoodsModel.findByIdAndDelete(id);
+    ctx.body = await FoodsModel.findByIdAndDelete(id);
   },
 };
