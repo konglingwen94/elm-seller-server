@@ -32,6 +32,7 @@ router.patch(
   FoodsController.updateOne
 );
 router.get("/foods", FoodsController.queryList);
+router.get("/admin/foods", FoodsController.queryListByOpts);
 router.get("/foods/:id", FoodsController.queryById);
 
 // 商品菜单
@@ -60,15 +61,14 @@ router.get("/seller", sellerController.queryOne);
 
 // 上传
 router.post("/uploads", upload.single("file"), (ctx) => {
-  // console.log(ctx.req.file, )
+  
   if (!ctx.req.file) {
     return (ctx.body = {
       message: "请选择上传的文件",
     });
   }
 
-  // console.log(ctx.req.file);
-// debugger
+  
   ctx.body = {
     path:`/uploads/${ctx.req.file.filename}`,
   };

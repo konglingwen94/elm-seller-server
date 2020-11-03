@@ -4,16 +4,20 @@ const { resolveFilterOptions, resolvePagination } = require("../helper/utils");
 
 module.exports = {
   async queryList(ctx) {
+    const { sort } = resolveFilterOptions();
+
+    var results = await FoodsModel.find().sort(sort);
+
+    ctx.body = results;
+  },
+  async queryListByOpts(ctx) {
     const { page, pageSize } = resolvePagination({ page: ctx.query.page, pageSize: ctx.query.pageSize });
 
     const { skip, limit, sort } = resolveFilterOptions({ page, pageSize });
 
     const total = await FoodsModel.countDocuments();
 
-    var results = await FoodsModel.find()
-      .sort(sort)
-      .skip(skip)
-      .limit(limit);
+    var results = await FoodsModel.find().sort(sort).skip(skip).limit(limit);
 
     ctx.body = {
       data: results,
@@ -35,7 +39,6 @@ module.exports = {
     ctx.body = result;
   },
   async createOne(ctx, next) {
-     
     ctx.body = await FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {
