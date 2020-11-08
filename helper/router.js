@@ -18,36 +18,38 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 // 商品
-router.delete("/foods/:id", FoodsController.deleteOne);
+router.delete("/admin/foods/:id", FoodsController.deleteOne);
 router.post(
-  "/foods",
+  "/admin/foods",
   middleware.verifyParams({ required: ["name", "price", "oldPrice",'image'], ruleName: "foods" }),
   FoodsController.createOne
 );
 
 router.patch(
-  "/foods/:id",
+  "/admin/foods/:id",
   middleware.verifyParams({ ruleName: "foods" }),
 
   FoodsController.updateOne
 );
 router.get("/foods", FoodsController.queryList);
 router.get("/admin/foods", FoodsController.queryListByOpts);
-router.get("/foods/:id", FoodsController.queryById);
+// router.get("/foods/:id", FoodsController.queryById);
+router.get("/admin/foods/:id", FoodsController.queryById);
 
 // 商品菜单
 
 router.post(
-  "/menus",
+  "/admin/menus",
 
   middleware.verifyParams({ required: ["name", "type"], ruleName: "menu" }),
 
   menuController.createOne
 );
 router.get("/menus", menuController.queryList);
-router.delete("/menus/:id", menuController.deleteOne);
+router.get("/admin/menus", menuController.queryList);
+router.delete("/admin/menus/:id", menuController.deleteOne);
 router.patch(
-  "/menus/:id",
+  "/admin/menus/:id",
 
   menuController.updateOne
 );
