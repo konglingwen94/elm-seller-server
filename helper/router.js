@@ -1,5 +1,4 @@
 const Router = require("koa-router");
-const multer = require("koa-multer");
 
 const router = new Router({ prefix: "/api" });
 
@@ -7,21 +6,14 @@ const FoodsController = require("../controller/foods");
 const menuController = require("../controller/menu");
 const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
+const uploadController = require("../controller/upload");
+
 const middleware = require("./middleware");
-
-const storage = multer.diskStorage({
-  destination: "public/uploads",
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
 // 商品
 router.delete("/admin/foods/:id", FoodsController.deleteOne);
 router.post(
   "/admin/foods",
-  middleware.verifyParams({ required: ["name", "price", "oldPrice",'image'], ruleName: "foods" }),
+  middleware.verifyParams({ required: ["name", "price", "oldPrice", "image"], ruleName: "foods" }),
   FoodsController.createOne
 );
 
@@ -31,11 +23,10 @@ router.patch(
 
   FoodsController.updateOne
 );
-router.get("/foods", FoodsController.queryList);
 router.get("/admin/foods", FoodsController.queryListByOpts);
-// router.get("/foods/:id", FoodsController.queryById);
 router.get("/admin/foods/:id", FoodsController.queryById);
 
+router.get("/foods", FoodsController.queryList);
 // 商品菜单
 
 router.post(
@@ -45,7 +36,6 @@ router.post(
 
   menuController.createOne
 );
-router.get("/menus", menuController.queryList);
 router.get("/admin/menus", menuController.queryList);
 router.delete("/admin/menus/:id", menuController.deleteOne);
 router.patch(
@@ -54,48 +44,18 @@ router.patch(
   menuController.updateOne
 );
 
+router.get("/menus", menuController.queryList);
 // 商品评价
 
-router.delete("/ratings/:id", ratingController.deleteOne);
+router.get("/admin/ratings", ratingController.queryList);
+router.delete("/admin/ratings/:id", ratingController.deleteOne);
 router.get("/ratings", ratingController.queryList);
-
+// 商家信息
 router.get("/seller", sellerController.queryOne);
 
 // 上传
-router.post("/uploads", upload.single("file"), (ctx) => {
-  
-  if (!ctx.req.file) {
-    return (ctx.body = {
-      message: "请选择上传的文件",
-    });
-  }
+router.post("/admin/uploads", uploadController.uploader.single("file"), uploadController.uploadOne);
 
-  
-  ctx.body = {
-    path:`/uploads/${ctx.req.file.filename}`,
-  };
-});
-
-router.delete("/uploads/:filename", (ctx) => {
-  const fs = require("fs");
-  const path = require("path");
-  const filename = ctx.params.filename;
-  if (!filename) {
-    return (ctx.body = {
-      message: "请添加要删除的文件名称",
-    });
-  }
-  try {
-    fs.unlinkSync(path.join(__dirname, "../public/uploads/" + filename));
-  } catch (error) {
-    // console.log(error);
-    if (error.errno === -2) {
-      ctx.status = 404;
-      return (ctx.body = { message: "没有此文件" });
-    }
-  }
-
-  ctx.status = 204;
-});
+router.delete("/admin/uploads/:filename", uploadController.deleteOne);
 
 module.exports = router;
