@@ -4,7 +4,7 @@ function copy(source) {
   let obj = {};
   if (typeof source !== "object") {
     return source
-    // throw new Error(`传入的参数 ${source} 不是对象类型的值`);
+     
   }
 
 
@@ -30,7 +30,7 @@ module.exports = {
     }
 
     const rules = copy(validateRules[ruleName]);
-//     console.log(rules);
+ 
 
     if (Array.isArray(required)) {
       required.forEach((key) => {
@@ -71,7 +71,7 @@ module.exports = {
 
         ctx.body = response;
 
-        return;
+         
       }
     };
   },
