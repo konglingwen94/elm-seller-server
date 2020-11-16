@@ -4,7 +4,7 @@ const mount = require("koa-mount");
 const bodyparser = require("koa-bodyparser");
 const connectDB = require("./helper/mongoose");
 const middleware = require("./helper/middleware");
-const router = require("./helper/router");
+const router = require("./router/router");
 
 const parameter = require("koa-parameter");
 

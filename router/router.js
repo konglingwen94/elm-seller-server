@@ -8,7 +8,7 @@ const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
 const uploadController = require("../controller/upload");
 
-const middleware = require("./middleware");
+const middleware = require("../helper/middleware");
 // 商品
 router.delete("/admin/foods/:id", FoodsController.deleteOne);
 router.post(

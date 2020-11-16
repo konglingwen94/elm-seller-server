@@ -6,7 +6,7 @@ const SellerModel = require("../model/seller");
 const goods = require("../data/goods");
 const seller = require("../data/seller").data;
 let ratings = require("../data/ratings").data;
-const connectDB = require("./mongoose");
+const connectDB = require("../helper/mongoose");
 
 if (typeof Array.prototype.flat !== "function") {
   Array.prototype.flat = function _flat() {
