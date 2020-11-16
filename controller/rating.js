@@ -16,4 +16,9 @@ module.exports = {
     await RatingModel.findByIdAndDelete(id);
     ctx.status = 204;
   },
+  async deleteMany(ctx) {
+    const { idList } = ctx.request.body;
+    await Promise.all(idList.map((id) => RatingModel.findByIdAndDelete(id)));
+    ctx.status = 204;
+  },
 };

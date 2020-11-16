@@ -49,6 +49,7 @@ router.get("/menus", menuController.queryList);
 
 router.get("/admin/ratings", ratingController.queryList);
 router.delete("/admin/ratings/:id", ratingController.deleteOne);
+router.post("/admin/ratings", ratingController.deleteMany);
 router.get("/ratings", ratingController.queryList);
 // 商家信息
 router.get("/seller", sellerController.queryOne);
