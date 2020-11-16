@@ -47,6 +47,7 @@ router.patch(
 router.get("/menus", menuController.queryList);
 // 商品评价
 
+router.get("/ratings", ratingController.queryAllList);
 router.get("/admin/ratings", ratingController.queryList);
 router.delete("/admin/ratings/:id", ratingController.deleteOne);
 router.post("/admin/ratings", ratingController.deleteMany);

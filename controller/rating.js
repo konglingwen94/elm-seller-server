@@ -8,8 +8,12 @@ module.exports = {
     const total = await RatingModel.countDocuments();
 
     const data = await RatingModel.find().sort(opts.sort).skip(opts.skip).limit(opts.limit);
-    // debugger;
     ctx.body = { data, pagination, total };
+  },
+  async queryAllList(ctx) {
+    const opts = resolveFilterOptions();
+    const data = await RatingModel.find().sort(opts.sort);
+    ctx.body = data;
   },
   async deleteOne(ctx) {
     const { id } = ctx.params;
