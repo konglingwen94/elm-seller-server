@@ -1,7 +1,6 @@
-const data = require("../data/seller.json");
-
+const SellerModel=require('../model/seller')
 module.exports = {
-  queryOne(ctx) {
-    ctx.body= data.data;
+  async queryOne(ctx) {
+    ctx.body= await SellerModel.findOne();
   },
 };
