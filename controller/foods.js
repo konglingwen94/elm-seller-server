@@ -32,13 +32,16 @@ module.exports = {
     const { id } = ctx.params;
 
     var result = await FoodsModel.findById(id);
-    var ratings = await RatingModel.find({ foodID: result.id });
-    result = result.toObject();
 
-    result.ratings = ratings;
+    if (result) {
+      var ratings = await RatingModel.find({ foodID: result.id });
+      result = result.toObject();
+
+      result.ratings = ratings;
+    }
     ctx.body = result;
   },
-  async createOne(ctx, next) {
+  async createOne(ctx,  ) {
     ctx.body = await FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {
