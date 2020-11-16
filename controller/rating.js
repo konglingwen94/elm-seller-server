@@ -6,6 +6,7 @@ module.exports = {
   },
   async deleteOne(ctx) {
     const { id } = ctx.params;
-    ctx.body=await RatingModel.findByIdAndDelete(id);
+    await RatingModel.findByIdAndDelete(id);
+    ctx.status=204
   },
 };
