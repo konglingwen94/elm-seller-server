@@ -54,6 +54,7 @@ router.post("/admin/ratings", ratingController.deleteMany);
 router.get("/ratings", ratingController.queryList);
 // 商家信息
 router.get("/seller", sellerController.queryOne);
+router.get("/admin/seller", sellerController.queryOne);
 
 // 上传
 router.post("/admin/uploads", uploadController.uploader.single("file"), uploadController.uploadOne);
