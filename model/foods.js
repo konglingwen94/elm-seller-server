@@ -17,11 +17,6 @@ const FoodsSchema = new mongoose.Schema(
   } 
 );
 
-// FoodsSchema.pre("save", (next) => {
-//   if (!this.isNew) {
-//     this.updatedAt = Date.now();
-//   }
-//   next();
-// });
+ 
 
 module.exports = mongoose.model("Foods", FoodsSchema);

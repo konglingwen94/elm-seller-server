@@ -16,6 +16,14 @@ const MenuSchema = new mongoose.Schema(
   }
 );
 
+MenuSchema.virtual('foodsCount',{
+  ref: 'Foods', // The model to use
+  localField: '_id', // Find people where `localField`
+  foreignField: 'menuID', // is equal to `foreignField`
+  count: true,
+})
+
+
 MenuSchema.pre("save", (next) => {
   if (!this.isNew) {
     this.updatedAt = Date.now();
