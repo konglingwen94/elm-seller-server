@@ -25,6 +25,7 @@ router.patch(
 );
 router.get("/admin/foods", FoodsController.queryListByOpts);
 router.get("/admin/foods/:id", FoodsController.queryById);
+router.get("/foods/:id", FoodsController.queryById);
 
 router.get("/foods", FoodsController.queryList);
 // 商品菜单
