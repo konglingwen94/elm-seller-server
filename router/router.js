@@ -75,6 +75,7 @@ router.delete("/admin/uploads/:filename", middleware.adminRequired(), uploadCont
 
 router.post("/admin/administrators/login", administratorController.login);
 router.post("/admin/administrators", middleware.adminRequired(), administratorController.createAccount);
+router.patch("/admin/administrators/:id", middleware.adminRequired(), administratorController.updateAccount);
 router.patch("/admin/administrators/:id/change-password", middleware.adminRequired(), administratorController.changePassword);
  
 

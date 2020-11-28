@@ -24,12 +24,19 @@ module.exports = {
     const hashPass = await bcrypt.hash(password, 10);
 
     const newUser = await AdministratorModel.create({ password: hashPass, username });
-     
+
     ctx.body = pick(newUser, ["username"]);
+  },
+  async updateAccount(ctx) {
+    const { id } = ctx.params;
+    const { username } = ctx.request.body;
+
+    await AdministratorModel.findByIdAndUpdate(id, { username });
+
+    ctx.status = 204;
   },
   async login(ctx) {
     const { username, password } = ctx.request.body;
-    
 
     const result = await AdministratorModel.findOne({ username });
 
@@ -37,8 +44,6 @@ module.exports = {
       ctx.status = 404;
       return (ctx.body = { message: "没有此用户" });
     }
-
-    
 
     if (!bcrypt.compareSync(password, result.password)) {
       ctx.status = 403;
@@ -48,7 +53,6 @@ module.exports = {
 
     const token = jwt.sign({ username }, "secretKey", { expiresIn: "5h" });
 
-    ctx.body = { admin:pick(result,['username']), token };
+    ctx.body = { admin: pick(result, ["username"]), token };
   },
-  
 };
