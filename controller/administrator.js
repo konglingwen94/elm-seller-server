@@ -48,7 +48,7 @@ module.exports = {
 
     const token = jwt.sign({ username }, "secretKey", { expiresIn: "5h" });
 
-    ctx.body = { username, token };
+    ctx.body = { admin:pick(result,['username']), token };
   },
   
 };

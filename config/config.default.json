@@ -1,7 +1,11 @@
 {
-  "database": "elm-seller",
-  "host": "127.0.0.1",
-  "port": "27017",
-  "username": "",
-  "password": ""
+  "mongodb": {
+    "database": "elm-seller",
+    "host": "127.0.0.1",
+    "port": "27017",
+    "username": "",
+    "password": ""
+  },
+  "expireIn": "1h",
+  "secretKey": "secretkey"
 }

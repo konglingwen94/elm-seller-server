@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-const defaultConfig = require("../ecosystem.config").env.mongoose;
-// const defaultConfig = require("../config/config.default.json");
+const defaultConfig = require("../config/config.default.json").mongodb;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    const { database, host, port, username, password } = defaultConfig;
+    const { database, host, username, password } = defaultConfig;
 
     let URI = `mongodb://`;
 

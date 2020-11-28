@@ -6,7 +6,10 @@ module.exports = model(
     {
       username: {
         type: String,
-        default: "root",
+      },
+      role: {
+        type: String,
+        default:'ROOT'
       },
       password: String,
     },
