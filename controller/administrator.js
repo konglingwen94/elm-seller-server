@@ -1,8 +1,9 @@
-const AdministratorModel = require("../model/administrator");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const AdministratorModel = require("../model/administrator");
 const { pick } = require("../helper/utils");
 module.exports = {
-  async updateOne(ctx) {
+  async changePassword(ctx) {
     const { id } = ctx.params;
     const { oldPassword, newPassword } = ctx.request.body;
 
@@ -16,25 +17,28 @@ module.exports = {
     await AdministratorModel.findByIdAndUpdate(id, { password: hashPass });
     ctx.status = 204;
   },
-  async createOne(ctx) {
+  async createAccount(ctx) {
     const { password, username } = ctx.request.body;
 
     // 加密密码
     const hashPass = await bcrypt.hash(password, 10);
 
     const newUser = await AdministratorModel.create({ password: hashPass, username });
-    // debugger
+     
     ctx.body = pick(newUser, ["username"]);
   },
   async login(ctx) {
     const { username, password } = ctx.request.body;
+    
 
     const result = await AdministratorModel.findOne({ username });
 
     if (!result) {
-      ctx.status = 403;
+      ctx.status = 404;
       return (ctx.body = { message: "没有此用户" });
     }
+
+    
 
     if (!bcrypt.compareSync(password, result.password)) {
       ctx.status = 403;
@@ -42,6 +46,9 @@ module.exports = {
       return (ctx.body = { message: "错误的密码" });
     }
 
-    ctx.body = { message: "ok" };
+    const token = jwt.sign({ username }, "secretKey", { expiresIn: "5h" });
+
+    ctx.body = { username, token };
   },
+  
 };

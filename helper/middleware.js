@@ -1,12 +1,11 @@
+const jwt = require("jsonwebtoken");
 const validateRules = require("./validatorRules.js");
 
 function copy(source) {
   let obj = {};
   if (typeof source !== "object") {
-    return source
-     
+    return source;
   }
-
 
   if (Array.isArray(source)) {
     obj = [];
@@ -30,7 +29,6 @@ module.exports = {
     }
 
     const rules = copy(validateRules[ruleName]);
- 
 
     if (Array.isArray(required)) {
       required.forEach((key) => {
@@ -70,10 +68,31 @@ module.exports = {
         }
 
         ctx.body = response;
-
-         
       }
     };
   },
-  
+  adminRequired() {
+    return async (ctx, next) => {
+      let token = ctx.headers["authorization"];
+ 
+      if (!token) {
+        throw Error("无效的token");
+      }
+      token = token.split(" ")[1];
+     
+      try {
+        
+        var decodeToken = jwt.verify(token, "secretKey");
+      } catch (error) {
+        if (error.name === "TokenExpiredError") {
+          return (ctx.body = { message: "过期的token" });
+        }
+
+        return (ctx.body = { message: "无效的token" });
+      }
+
+      ctx.state.admin = decodeToken;
+      await next();
+    };
+  },
 };
