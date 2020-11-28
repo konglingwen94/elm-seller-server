@@ -35,6 +35,17 @@ function resolveFilterOptions(filter = {}) {
   };
 }
 
+function pick(obj, keys) {
+  const result = {};
+
+  keys.forEach((key) => {
+    if (key in obj) {
+      result[key] = obj[key];
+    }
+  });
+  return result;
+}
+
 function defaults(obj, ...sources) {
   obj = Object(obj);
   sources.forEach((source) => {
@@ -47,11 +58,12 @@ function defaults(obj, ...sources) {
     }
   });
 
-  return obj
+  return obj;
 }
 
 module.exports = {
   resolvePagination,
   resolveFilterOptions,
   defaults,
+  pick,
 };

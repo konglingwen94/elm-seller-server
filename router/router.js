@@ -7,6 +7,7 @@ const menuController = require("../controller/menu");
 const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
 const uploadController = require("../controller/upload");
+const administratorController = require("../controller/administrator");
 
 const middleware = require("../helper/middleware");
 /*
@@ -66,5 +67,11 @@ router.get("/admin/seller", sellerController.queryOne);
 router.post("/admin/uploads", uploadController.uploader.single("file"), uploadController.uploadOne);
 
 router.delete("/admin/uploads/:filename", uploadController.deleteOne);
+
+// 管理员
+
+router.post('/admin/administrators/login',administratorController.login)
+router.post('/admin/administrators',administratorController.createOne)
+router.patch('/admin/administrators/:id',administratorController.updateOne)
 
 module.exports = router;
