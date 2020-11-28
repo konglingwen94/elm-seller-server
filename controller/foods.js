@@ -1,8 +1,27 @@
 const FoodsModel = require("../model/foods");
 const RatingModel = require("../model/rating");
-const { resolveFilterOptions, resolvePagination } = require("../helper/utils");
+const { defaults, resolveFilterOptions, resolvePagination } = require("../helper/utils");
 
 module.exports = {
+  async queryFoodStatistic(ctx) {
+    const defaultOpt = { sort: "sale", count: 10 };
+    let opt = defaults({}, ctx.query, defaultOpt);
+
+    opt = resolveFilterOptions({ pageSize: opt.count, sort: { [opt.sort]: -1 } });
+
+    const result = await FoodsModel.find().populate('ratings').sort(opt.sort).skip(opt.skip).limit(opt.limit);
+    
+    
+    ctx.body = result.map((item) => {
+      return {
+        name: item.name,
+        sellCount: item.sellCount,
+
+        ratingCount: item.rating,
+        highRating: parseFloat((item.ratings.filter(item=>item.rateType===0).length/item.ratings.length).toFixed(2)),
+      };
+    });
+  },
   async queryList(ctx) {
     const { sort } = resolveFilterOptions();
 
@@ -41,7 +60,7 @@ module.exports = {
     }
     ctx.body = result;
   },
-  async createOne(ctx,  ) {
+  async createOne(ctx) {
     ctx.body = await FoodsModel.create(ctx.request.body);
   },
   async updateOne(ctx) {

@@ -9,7 +9,12 @@ const sellerController = require("../controller/seller");
 const uploadController = require("../controller/upload");
 
 const middleware = require("../helper/middleware");
-// 商品
+/*
+ 商品
+*/
+// 统计
+router.get("/admin/food-statistic", FoodsController.queryFoodStatistic);
+
 router.delete("/admin/foods/:id", FoodsController.deleteOne);
 router.post(
   "/admin/foods",
@@ -28,7 +33,7 @@ router.get("/admin/foods/:id", FoodsController.queryById);
 router.get("/foods/:id", FoodsController.queryById);
 
 router.get("/foods", FoodsController.queryList);
-// 商品菜单
+// 分类
 
 router.post(
   "/admin/menus",

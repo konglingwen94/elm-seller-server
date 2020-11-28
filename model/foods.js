@@ -10,13 +10,17 @@ const FoodsSchema = new mongoose.Schema(
     rating: Number,
     info: String,
     menuID: ObjectId,
-    image:String
+    image: String,
   },
   {
     timestamps: true,
-  } 
+  }
 );
 
+ FoodsSchema.virtual("ratings", {
+  ref: "Rating",
+  localField: "_id",
+  foreignField: "foodID",
+});
  
-
 module.exports = mongoose.model("Foods", FoodsSchema);

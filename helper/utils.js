@@ -46,6 +46,8 @@ function defaults(obj, ...sources) {
       }
     }
   });
+
+  return obj
 }
 
 module.exports = {

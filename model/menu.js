@@ -24,11 +24,5 @@ MenuSchema.virtual('foodsCount',{
 })
 
 
-MenuSchema.pre("save", (next) => {
-  if (!this.isNew) {
-    this.updatedAt = Date.now();
-  }
-  next();
-});
 
 module.exports =  mongoose.model("Menu", MenuSchema);
