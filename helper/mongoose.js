@@ -13,10 +13,14 @@ module.exports = () => {
 
     URI += `${host}/${database}`;
 
-    mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
-      resolve();
-      console.log(`Database is connecting at ${URI}`);
-    });
+    mongoose.connect(
+      URI,
+      { useUnifiedTopology: true, useFindAndModify: false, useNewUrlParser: true },
+      () => {
+        resolve();
+        console.log(`Database is connecting at ${URI}`);
+      }
+    );
 
     mongoose.connection.on("error", (err) => {
       reject(err);

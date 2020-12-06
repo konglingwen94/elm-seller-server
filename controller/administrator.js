@@ -30,7 +30,6 @@ module.exports = {
   async updateAccount(ctx) {
     const { id } = ctx.params;
     const { username } = ctx.request.body;
-
     await AdministratorModel.findByIdAndUpdate(id, { username });
 
     ctx.status = 204;
