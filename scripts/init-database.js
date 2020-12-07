@@ -66,7 +66,8 @@ connectDB()
       SellerModel.create(seller),
     ]);
   })
-  .then(() => {
+  .then((data) => {
+    console.log(`成功初始化 ${data.flat(3).length}条数据`)
     process.exit(0);
   })
   .catch((err) => {
