@@ -9,7 +9,9 @@ module.exports = {
 
     const result = await AdministratorModel.findById(id);
     // 比较原密码是否正确
+     
     if (!bcrypt.compareSync(oldPassword, result.password)) {
+      ctx.status=400
       return (ctx.body = { message: "原密码错误" });
     }
     // 加密新密码
@@ -52,6 +54,6 @@ module.exports = {
 
     const token = jwt.sign({ username }, "secretKey", { expiresIn: "5h" });
 
-    ctx.body = { admin: pick(result, ["username"]), token };
+    ctx.body = { admin: pick(result, ["username",'id']), token };
   },
 };
