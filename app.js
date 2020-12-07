@@ -12,9 +12,11 @@ const parameter = require("koa-parameter");
 const app = new Koa();
 const PORT = process.env.PORT || 5000;
 
-// 处理vue-router使用history模式返回index.html
-app.use(historyApiFallback({ index: "/admin/index.html", whiteList: ["/api",""] }));
 app.use(static("./public/web"));
+// 处理vue-router使用history模式返回index.html
+
+app.use(historyApiFallback({ index: "/admin/index.html", whiteList: ["/api"] }));
+
 app.use(mount("/uploads", static("./public/uploads")));
 app.use(mount("/admin", static("./public/admin")));
 app.use(bodyparser());
