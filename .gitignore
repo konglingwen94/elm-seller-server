@@ -1,5 +1,4 @@
 node_modules
 test
 public
-# production  env configuration files
-*.prod.*
+ 

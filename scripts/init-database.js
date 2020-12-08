@@ -54,9 +54,9 @@ const foods = goods.data
   })
   .flat();
 
-const [NODE_ENV] = process.argv.slice(2);
+const [user,pwd] = process.argv.slice(2);
 
-connectDB(NODE_ENV)
+connectDB(user,pwd)
   .then(() => {
     return Promise.all([
       MenuModel.create(menus),

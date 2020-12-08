@@ -1,18 +1,13 @@
 const mongoose = require("mongoose");
-try {
-  var prodConfig = require("../config/config.prod.json").mongodb;
-} catch (error) {
-  prodConfig = {};
-}
-let defaultConfig = require("../config/config.default.json").mongodb;
 
-module.exports = (NODE_ENV) => {
-     
-  if (NODE_ENV === "production" || NODE_ENV==='test') {
-    Object.assign(defaultConfig, prodConfig);
+const defaultConfig = require("../config/config.default.json").mongodb;
+
+module.exports = (username, password) => {
+  if (username && password) {
+    Object.assign(defaultConfig, { username, password });
   }
   return new Promise((resolve, reject) => {
-    const { database, host, username, password,authSource } = defaultConfig;
+    const { database, host, username, password } = defaultConfig;
 
     let URI = `mongodb://`;
 
@@ -22,12 +17,10 @@ module.exports = (NODE_ENV) => {
 
     URI += `${host}/${database}`;
 
-    if(authSource){
-      URI+=`?authSource=${authSource}`
+    if (authSource) {
+      URI += `?authSource=admin`;
     }
 
-     
- 
     mongoose.connect(
       URI,
       { useUnifiedTopology: true, useFindAndModify: false, useNewUrlParser: true },

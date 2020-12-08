@@ -5,17 +5,17 @@ const connectDB = require("../helper/mongoose");
 
 const argv = process.argv.slice(2);
 
-if (argv.length !== 2) {
+if (argv.length < 2) {
   console.error("username and password is required");
   console.log("Please use following command");
-  console.log("node scripts/init-admin.js <username> <password> <NODE_ENV>");
-  console.log('<NODE_ENV> is optional and this can be `production` or `test`')
+  console.log("node scripts/init-admin.js <username> <password> <dbUser> <dbPwd>");
+  console.log('<dbUser> <dbPwd> is optional')
   process.exit(1);
 }
  
-const [username, password,NODE_ENV] = process.argv.slice(2);
+const [username, password,dbUser,dbPwd] = process.argv.slice(2);
 
-connectDB(NODE_ENV)
+connectDB(dbUser,dbPwd)
   .then(() => {
     return AdministratorModel.findOne();
   })
