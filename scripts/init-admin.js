@@ -8,13 +8,14 @@ const argv = process.argv.slice(2);
 if (argv.length !== 2) {
   console.error("username and password is required");
   console.log("Please use following command");
-  console.log("node scripts/init-admin.js <username> <password>");
+  console.log("node scripts/init-admin.js <username> <password> <NODE_ENV>");
+  console.log('<NODE_ENV> is optional and this can be `production` or `test`')
   process.exit(1);
 }
  
-const [username, password] = process.argv.slice(2);
+const [username, password,NODE_ENV] = process.argv.slice(2);
 
-connectDB()
+connectDB(NODE_ENV)
   .then(() => {
     return AdministratorModel.findOne();
   })

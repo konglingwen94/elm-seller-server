@@ -26,7 +26,7 @@ app.use(middleware.errorHandler());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-connectDB().then(() => {
+connectDB(process.env.NODE_ENV).then(() => {
   if (process.env.NODE_ENV !== "production") {
     // console.clear();
   }

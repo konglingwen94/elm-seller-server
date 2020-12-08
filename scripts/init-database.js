@@ -54,9 +54,9 @@ const foods = goods.data
   })
   .flat();
 
- 
+const [NODE_ENV] = process.argv.slice(2);
 
-connectDB()
+connectDB(NODE_ENV)
   .then(() => {
     return Promise.all([
       MenuModel.create(menus),
@@ -67,7 +67,7 @@ connectDB()
     ]);
   })
   .then((data) => {
-    console.log(`成功初始化 ${data.flat(3).length}条数据`)
+    console.log(`成功初始化 ${data.flat(3).length}条数据`);
     process.exit(0);
   })
   .catch((err) => {
