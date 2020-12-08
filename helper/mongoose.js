@@ -16,20 +16,22 @@ module.exports = (username, password) => {
     }
 
     URI += `${host}/${database}`;
-
-    if (authSource) {
-      URI += `?authSource=admin`;
+ if (username && password) {
+URI += `?authSource=admin`;      
     }
+
+
+
 
     mongoose.connect(
       URI,
       { useUnifiedTopology: true, useFindAndModify: false, useNewUrlParser: true },
-      () => {
-        resolve();
-        console.log(`Database is connecting at ${URI}`);
-      }
+      
     );
-
+mongoose.connection.once("open", () => {
+       console.log(`Database is connecting at ${URI}`);
+       resolve()
+    });
     mongoose.connection.on("error", (err) => {
       reject(err);
     });
