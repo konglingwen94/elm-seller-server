@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const AdministratorModel = require("../model/administrator");
 const { pick } = require("../helper/utils");
+const { secretKey, expiresIn } = require("../config/config.default.json");
 module.exports = {
   async changePassword(ctx) {
     const { id } = ctx.params;
@@ -9,9 +10,9 @@ module.exports = {
 
     const result = await AdministratorModel.findById(id);
     // 比较原密码是否正确
-     
+
     if (!bcrypt.compareSync(oldPassword, result.password)) {
-      ctx.status=400
+      ctx.status = 400;
       return (ctx.body = { message: "原密码错误" });
     }
     // 加密新密码
@@ -52,8 +53,8 @@ module.exports = {
       return (ctx.body = { message: "错误的密码" });
     }
 
-    const token = jwt.sign({ username }, "secretKey", { expiresIn: "5h" });
+    const token = jwt.sign({ username }, secretKey, { expiresIn });
 
-    ctx.body = { admin: pick(result, ["username",'id']), token };
+    ctx.body = { admin: pick(result, ["username", "id"]), token };
   },
 };

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const validateRules = require("./validatorRules.js");
-
+const { secretKey,  } = require("../config/config.default.json");
 function copy(source) {
   let obj = {};
   if (typeof source !== "object") {
@@ -82,12 +82,12 @@ module.exports = {
       token = token.split(" ")[1];
 
       try {
-        var decodeToken = jwt.verify(token, "secretKey");
+        var decodeToken = jwt.verify(token, secretKey);
       } catch (error) {
+        ctx.status = 400;
         if (error.name === "TokenExpiredError") {
           return (ctx.body = { message: "过期的token" });
         }
-
         return (ctx.body = { message: "无效的token" });
       }
 

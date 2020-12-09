@@ -4,8 +4,9 @@ const storage = multer.diskStorage({
   destination: "public/uploads",
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
+    // cb(null, Date.now() + "-" + file.originalname);
   },
-}); 
+});
 
 const uploader = multer({ storage: storage });
 
@@ -33,9 +34,9 @@ module.exports = {
     ctx.status = 204;
   },
   uploadOne(ctx) {
-      
-      
+    debugger;
     if (!ctx.req.file) {
+      ctx.status=400
       return (ctx.body = {
         message: "请选择上传的文件",
       });

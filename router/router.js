@@ -60,6 +60,7 @@ router.get("/ratings", ratingController.queryList);
 // 商家信息
 router.get("/seller", sellerController.queryOne);
 router.get("/admin/seller", sellerController.queryOne);
+router.patch("/admin/seller/:id", sellerController.updateOne);
 
 // 上传
 router.post(

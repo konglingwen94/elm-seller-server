@@ -17,8 +17,16 @@ module.exports = {
     }, 0);
 
     const totalFoodCount = await FoodModel.countDocuments();
-    
+
     const sellerInfo = (await SellerModel.findOne()).toObject();
     ctx.body = Object.assign(sellerInfo, { totalSellCount, totalPrice, totalFoodCount });
+  },
+  async updateOne(ctx) {
+    const { bulletin, deliveryPrice, infos, minPrice, name, pics, supports } = ctx.request.body;
+
+    const payload = { bulletin, deliveryPrice, infos, minPrice, name, pics, supports };
+    const id=ctx.params.id
+    await SellerModel.findByIdAndUpdate(id, payload);
+    ctx.status=204
   },
 };

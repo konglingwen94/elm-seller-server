@@ -6,6 +6,6 @@
     "username": "",
     "password": ""
   },
-  "expireIn": "1h",
+  "expiresIn": "10 h",
   "secretKey": "secretkey"
 }
