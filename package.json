@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:test": "cross-env NODE_ENV=test nodemon  app.js",
     "dev": "nodemon  app.js",
     "dev:debug": "nodemon --inspect  app.js",
     "start": "pm2 start  --env production",
@@ -19,6 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-compress": "^5.0.1",
     "koa-mount": "github:koajs/mount",
     "koa-multer": "^1.0.2",
     "koa-parameter": "^3.0.1",
