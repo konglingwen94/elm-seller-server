@@ -74,14 +74,14 @@ module.exports = {
   adminRequired() {
     return async (ctx, next) => {
       let token = ctx.headers["authorization"];
- 
+
       if (!token) {
-        throw Error("无效的token");
+        ctx.status = 400;
+        return (ctx.body = { message: "无效的token" });
       }
       token = token.split(" ")[1];
-     
+
       try {
-        
         var decodeToken = jwt.verify(token, "secretKey");
       } catch (error) {
         if (error.name === "TokenExpiredError") {
