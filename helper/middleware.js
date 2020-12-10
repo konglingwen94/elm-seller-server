@@ -1,34 +1,20 @@
 const jwt = require("jsonwebtoken");
 const validateRules = require("./validatorRules.js");
-const { secretKey,  } = require("../config/config.default.json");
-function copy(source) {
-  let obj = {};
-  if (typeof source !== "object") {
-    return source;
-  }
-
-  if (Array.isArray(source)) {
-    obj = [];
-    source.forEach((item, index) => {
-      obj[index] = copy(item);
-    });
-    return obj;
-  }
-
-  Object.keys(source).forEach((key) => {
-    obj[key] = typeof source[key] === "object" ? copy(source[key]) : source[key];
-  });
-  return obj;
-}
+const { secretKey } = require("../config/config.default.json");
+const { pick,copy } = require("../helper/utils");
 module.exports = {
   verifyParams(opts = {}) {
-    const { ruleName, required } = opts;
+    const { ruleName, required, validateFields } = opts;
 
     if (!validateRules.hasOwnProperty(ruleName)) {
       throw new Error(`Not Found ruleName ${ruleName}`);
     }
 
-    const rules = copy(validateRules[ruleName]);
+    let rules = copy(validateRules[ruleName]);
+
+    if (Array.isArray(validateFields)) {
+      rules = pick(rules, validateFields);
+    }
 
     if (Array.isArray(required)) {
       required.forEach((key) => {

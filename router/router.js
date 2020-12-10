@@ -75,9 +75,24 @@ router.delete("/admin/uploads/:filename", middleware.adminRequired(), uploadCont
 // 管理员
 
 router.post("/admin/administrators/login", administratorController.login);
+
 router.post("/admin/administrators", middleware.adminRequired(), administratorController.createAccount);
-router.patch("/admin/administrators/:id/change-account", middleware.adminRequired(), administratorController.updateAccount);
-router.patch("/admin/administrators/:id/change-password", middleware.adminRequired(), administratorController.changePassword);
- 
+
+router.patch(
+  "/admin/administrators/:id/change-account",
+  middleware.adminRequired(),
+  administratorController.updateAccount
+);
+
+router.patch(
+  "/admin/administrators/:id/change-password",
+  middleware.adminRequired(),
+  middleware.verifyParams({
+    ruleName: "administrator",
+    required: ["oldPassword", "newPassword",'id'],
+    validateFileds: ["oldPassword", "newPassword",'id'],
+  }),
+  administratorController.changePassword
+);
 
 module.exports = router;

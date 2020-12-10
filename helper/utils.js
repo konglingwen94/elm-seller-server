@@ -60,10 +60,29 @@ function defaults(obj, ...sources) {
 
   return obj;
 }
+function copy(source) {
+  let obj = {};
+  if (typeof source !== "object") {
+    return source;
+  }
 
+  if (Array.isArray(source)) {
+    obj = [];
+    source.forEach((item, index) => {
+      obj[index] = copy(item);
+    });
+    return obj;
+  }
+
+  Object.keys(source).forEach((key) => {
+    obj[key] = typeof source[key] === "object" ? copy(source[key]) : source[key];
+  });
+  return obj;
+}
 module.exports = {
   resolvePagination,
   resolveFilterOptions,
   defaults,
   pick,
+  copy
 };
