@@ -65,7 +65,7 @@ router.patch("/admin/seller/:id", sellerController.updateOne);
 // 上传
 router.post(
   "/admin/uploads",
-  middleware.adminRequired(),
+  
   uploadController.uploader.single("file"),
   uploadController.uploadOne
 );
