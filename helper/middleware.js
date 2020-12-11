@@ -70,7 +70,7 @@ module.exports = {
       try {
         var decodeToken = jwt.verify(token, secretKey);
       } catch (error) {
-        ctx.status = 400;
+        ctx.status = 403;
         if (error.name === "TokenExpiredError") {
           return (ctx.body = { message: "过期的token" });
         }
