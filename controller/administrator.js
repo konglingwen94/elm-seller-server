@@ -3,7 +3,22 @@ const jwt = require("jsonwebtoken");
 const AdministratorModel = require("../model/administrator");
 const { pick } = require("../helper/utils");
 const { secretKey, expiresIn } = require("../config/config.default.json");
+async function createAccount(ctx) {
+  const { password, username } = ctx.request.body;
+
+  // 加密密码
+  const hashPass = await bcrypt.hash(password, 10);
+
+  const newUser = await AdministratorModel.create({ password: hashPass, username, role: "junior" });
+
+  ctx.body = pick(newUser, ["username", "role"]);
+}
+
 module.exports = {
+  createAccount,
+  async queryList(ctx) {
+    ctx.body = await AdministratorModel.find();
+  },
   async changePassword(ctx) {
     const { id } = ctx.params;
     const { oldPassword, newPassword } = ctx.request.body;
@@ -20,16 +35,7 @@ module.exports = {
     await AdministratorModel.findByIdAndUpdate(id, { password: hashPass });
     ctx.status = 204;
   },
-  async createAccount(ctx) {
-    const { password, username } = ctx.request.body;
 
-    // 加密密码
-    const hashPass = await bcrypt.hash(password, 10);
-
-    const newUser = await AdministratorModel.create({ password: hashPass, username });
-
-    ctx.body = pick(newUser, ["username"]);
-  },
   async updateAccount(ctx) {
     const { id } = ctx.params;
     const { username } = ctx.request.body;
@@ -43,8 +49,14 @@ module.exports = {
     const result = await AdministratorModel.findOne({ username });
 
     if (!result) {
-      ctx.status = 404;
-      return (ctx.body = { message: "没有此用户" });
+      // 加密密码
+      const hashPass = await bcrypt.hash(password, 10);
+
+      const newUser = await AdministratorModel.create({ password: hashPass, username });
+
+      const token = jwt.sign({ username }, secretKey, { expiresIn });
+
+      return (ctx.body = { admin: pick(newUser, ["username", "id", "role"]), token });
     }
 
     if (!bcrypt.compareSync(password, result.password)) {
@@ -55,6 +67,6 @@ module.exports = {
 
     const token = jwt.sign({ username }, secretKey, { expiresIn });
 
-    ctx.body = { admin: pick(result, ["username", "id"]), token };
+    ctx.body = { admin: pick(result, ["username", "id", "role"]), token };
   },
 };

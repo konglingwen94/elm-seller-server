@@ -95,4 +95,6 @@ router.patch(
   administratorController.changePassword
 );
 
+router.get('/admin/administrators',administratorController.queryList)
+
 module.exports = router;

@@ -9,7 +9,7 @@ module.exports = model(
       },
       role: {
         type: String,
-        default:'ROOT'
+        default:'JUNIOR'
       },
       password: String,
     },
