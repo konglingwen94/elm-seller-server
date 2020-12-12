@@ -1,4 +1,4 @@
-const id = { type: "string", min: 24, max: 24, required: true };
+ 
 module.exports = {
   menu: {
     name: "string",
@@ -40,10 +40,14 @@ module.exports = {
       type: "string",
       min: 6,
     },
+    password: {
+      type: "string",
+      min: 6,
+    },
     username: {
       type: "string",
       required: true,
     },
-    id
+    
   },
 };

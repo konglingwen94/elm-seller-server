@@ -14,9 +14,21 @@ const middleware = require("../helper/middleware");
  商品
 */
 // 统计
+
+router.param("id", async (id, ctx, next) => {
+  ctx.verifyParams({ id: { type: "string", max: 24, min: 24 } });
+  await next();
+});
+
 router.get("/admin/food-statistic", FoodsController.queryFoodStatistic);
 
-router.delete("/admin/foods/:id", middleware.adminRequired(), FoodsController.deleteOne);
+router.delete(
+  "/admin/foods/:id",
+  middleware.adminRequired(),
+  middleware.verifyPermission(),
+
+  FoodsController.deleteOne
+);
 router.post(
   "/admin/foods",
   middleware.adminRequired(),
@@ -27,6 +39,8 @@ router.post(
 router.patch(
   "/admin/foods/:id",
   middleware.adminRequired(),
+  middleware.verifyPermission(),
+
   middleware.verifyParams({ ruleName: "foods" }),
 
   FoodsController.updateOne
@@ -46,55 +60,94 @@ router.post(
   menuController.createOne
 );
 router.get("/admin/menus", menuController.queryList);
-router.delete("/admin/menus/:id", middleware.adminRequired(), menuController.deleteOne);
-router.patch("/admin/menus/:id", middleware.adminRequired(), menuController.updateOne);
+router.delete(
+  "/admin/menus/:id",
+  middleware.adminRequired(),
+  middleware.verifyPermission(),
+  menuController.deleteOne
+);
+router.patch(
+  "/admin/menus/:id",
+  middleware.adminRequired(),
+  middleware.verifyPermission(),
+  menuController.updateOne
+);
 
 router.get("/menus", menuController.queryList);
 // 商品评价
 
 router.get("/ratings", ratingController.queryAllList);
 router.get("/admin/ratings", ratingController.queryList);
-router.delete("/admin/ratings/:id", middleware.adminRequired(), ratingController.deleteOne);
+router.delete(
+  "/admin/ratings/:id",
+  middleware.adminRequired(),
+  middleware.verifyPermission(),
+
+  ratingController.deleteOne
+);
 router.post("/admin/ratings", middleware.adminRequired(), ratingController.deleteMany);
 router.get("/ratings", ratingController.queryList);
 // 商家信息
 router.get("/seller", sellerController.queryOne);
 router.get("/admin/seller", sellerController.queryOne);
-router.patch("/admin/seller/:id", sellerController.updateOne);
+router.patch(
+  "/admin/seller/:id",
+  middleware.adminRequired(),
+  middleware.verifyPermission(),
+
+  sellerController.updateOne
+);
 
 // 上传
 router.post(
   "/admin/uploads",
-  
+
   uploadController.uploader.single("file"),
   uploadController.uploadOne
 );
 
-router.delete("/admin/uploads/:filename", middleware.adminRequired(), uploadController.deleteOne);
+router.delete(
+  "/admin/uploads/:filename",
+  middleware.adminRequired(),
+
+  uploadController.deleteOne
+);
 
 // 管理员
 
-router.post("/admin/administrators/login", administratorController.login);
+router.post(
+  "/admin/administrators/login",
+  middleware.verifyParams({ ruleName: "administrator", required: ["username", "password"] }),
+  administratorController.login
+);
 
-router.post("/admin/administrators", middleware.adminRequired(), administratorController.createAccount);
+// router.post("/admin/administrators", middleware.adminRequired(), administratorController.createAccount);
 
 router.patch(
   "/admin/administrators/:id/change-account",
   middleware.adminRequired(),
+  middleware.verifyPermission(),
+  middleware.verifyParams({
+    ruleName: "administrator",
+    required: ["username"],
+    validateFileds: ["username"],
+  }),
   administratorController.updateAccount
 );
 
 router.patch(
   "/admin/administrators/:id/change-password",
   middleware.adminRequired(),
+  middleware.verifyPermission(),
+
   middleware.verifyParams({
     ruleName: "administrator",
-    required: ["oldPassword", "newPassword",'id'],
-    validateFileds: ["oldPassword", "newPassword",'id'],
+    required: ["oldPassword", "newPassword"],
+    validateFileds: ["oldPassword", "newPassword"],
   }),
   administratorController.changePassword
 );
 
-router.get('/admin/administrators',administratorController.queryList)
+router.get("/admin/administrators", administratorController.queryList);
 
 module.exports = router;

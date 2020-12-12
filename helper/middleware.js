@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const validateRules = require("./validatorRules.js");
-const { secretKey } = require("../config/config.default.json");
-const { pick,copy } = require("../helper/utils");
+const { secretKey, expiresIn } = require("../config/config.default.json");
+const { pick, copy } = require("../helper/utils");
 module.exports = {
   verifyParams(opts = {}) {
     const { ruleName, required, validateFields } = opts;
@@ -17,6 +17,7 @@ module.exports = {
     }
 
     if (Array.isArray(required)) {
+ 
       required.forEach((key) => {
         if (rules.hasOwnProperty(key)) {
           rules[key].required = true;
@@ -68,7 +69,7 @@ module.exports = {
       token = token.split(" ")[1];
 
       try {
-        var decodeToken = jwt.verify(token, secretKey);
+        var decodeToken = jwt.verify(token, secretKey, { expiresIn });
       } catch (error) {
         ctx.status = 403;
         if (error.name === "TokenExpiredError") {
@@ -78,6 +79,28 @@ module.exports = {
       }
 
       ctx.state.admin = decodeToken;
+      await next();
+    };
+  },
+  verifyPermission() {
+    return async (ctx, next) => {
+      let token = ctx.headers["authorization"];
+      token = token.split(" ");
+      token = token[1] && token[1];
+
+      try {
+        var decoded = jwt.verify(token, secretKey, { expiresIn });
+      } catch (error) {
+        ctx.status = 403;
+        ctx.body = { message: "无效的token" };
+        return;
+      }
+      console.log(decoded);
+      if ((decoded && decoded.role) !== "ROOT") {
+        ctx.status = 400;
+        ctx.body = { message: "管理员没有此操作的权限" };
+        return;
+      }
       await next();
     };
   },
