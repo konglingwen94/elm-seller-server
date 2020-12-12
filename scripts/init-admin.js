@@ -26,7 +26,7 @@ connectDB(dbUser,dbPwd)
     return bcrypt.hash(password,10);
   })
   .then((password) => {
-    const payload = { username, password,role:'ROOT' };
+    const payload = { username, password,role:'ROOT',level:100 };
     return AdministratorModel.create(payload);
   })
   .then((result) => {

@@ -11,6 +11,10 @@ module.exports = model(
         type: String,
         default:'JUNIOR'
       },
+      level:{
+        type:Number,
+        default:1
+      },
       password: String,
     },
     { timestamps: true }

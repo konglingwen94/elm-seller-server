@@ -11,11 +11,11 @@ module.exports = {
     }
 
     let rules = copy(validateRules[ruleName]);
-
+    
     if (Array.isArray(validateFields)) {
       rules = pick(rules, validateFields);
+       
     }
-
     if (Array.isArray(required)) {
  
       required.forEach((key) => {
@@ -78,7 +78,7 @@ module.exports = {
         return (ctx.body = { message: "无效的token" });
       }
 
-      ctx.state.admin = decodeToken;
+      ctx.state.adminInfo = decodeToken;
       await next();
     };
   },
@@ -95,7 +95,7 @@ module.exports = {
         ctx.body = { message: "无效的token" };
         return;
       }
-      console.log(decoded);
+     
       if ((decoded && decoded.role) !== "ROOT") {
         ctx.status = 400;
         ctx.body = { message: "管理员没有此操作的权限" };

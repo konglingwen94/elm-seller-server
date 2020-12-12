@@ -117,11 +117,13 @@ router.delete(
 
 router.post(
   "/admin/administrators/login",
-  middleware.verifyParams({ ruleName: "administrator", required: ["username", "password"] }),
+  middleware.verifyParams({
+    ruleName: "administrator",
+    required: ["username", "password"],
+    validateFields: ["username", "password"],
+  }),
   administratorController.login
 );
-
-// router.post("/admin/administrators", middleware.adminRequired(), administratorController.createAccount);
 
 router.patch(
   "/admin/administrators/:id/change-account",
@@ -148,6 +150,6 @@ router.patch(
   administratorController.changePassword
 );
 
-router.get("/admin/administrators", administratorController.queryList);
+router.get("/admin/administrators", middleware.adminRequired(), administratorController.queryList);
 
 module.exports = router;

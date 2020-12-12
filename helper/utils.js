@@ -46,6 +46,19 @@ function pick(obj, keys) {
   return result;
 }
 
+function omit(obj, omitKeys = []) {
+  const result = {};
+  omitKeys = Array(omitKeys).flat(Infinity);
+   
+  Object.keys(obj).forEach((key) => {
+    if (omitKeys.includes(key)) return;
+    result[key] = obj[key];
+     
+  });
+
+  return result;
+}
+
 function defaults(obj, ...sources) {
   obj = Object(obj);
   sources.forEach((source) => {
@@ -84,5 +97,6 @@ module.exports = {
   resolveFilterOptions,
   defaults,
   pick,
-  copy
+  omit,
+  copy,
 };
