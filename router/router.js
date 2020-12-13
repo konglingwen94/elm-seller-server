@@ -47,6 +47,8 @@ router.patch(
 );
 router.get("/admin/foods", FoodsController.queryListByOpts);
 router.get("/admin/foods/:id", FoodsController.queryById);
+router.patch("/admin/foods/:id/enable", FoodsController.enableOne);
+router.patch("/admin/foods/:id/disable", FoodsController.disableOne);
 router.get("/foods/:id", FoodsController.queryById);
 
 router.get("/foods", FoodsController.queryList);

@@ -9,23 +9,24 @@ module.exports = {
 
     opt = resolveFilterOptions({ pageSize: opt.count, sort: { [opt.sort]: -1 } });
 
-    const result = await FoodsModel.find().populate('ratings').sort(opt.sort).skip(opt.skip).limit(opt.limit);
-    
-    
+    const result = await FoodsModel.find().populate("ratings").sort(opt.sort).skip(opt.skip).limit(opt.limit);
+
     ctx.body = result.map((item) => {
       return {
         name: item.name,
         sellCount: item.sellCount,
 
         ratingCount: item.rating,
-        highRating: parseFloat((item.ratings.filter(item=>item.rateType===0).length/item.ratings.length).toFixed(2)),
+        highRating: parseFloat(
+          (item.ratings.filter((item) => item.rateType === 0).length / item.ratings.length).toFixed(2)
+        ),
       };
     });
   },
   async queryList(ctx) {
     const { sort } = resolveFilterOptions();
 
-    var results = await FoodsModel.find().sort(sort);
+    var results = await FoodsModel.find({online:true}).sort(sort);
 
     ctx.body = results;
   },
@@ -36,7 +37,7 @@ module.exports = {
 
     const total = await FoodsModel.countDocuments();
 
-    var results = await FoodsModel.find().populate('category').sort(sort).skip(skip).limit(limit);
+    var results = await FoodsModel.find().populate("category").sort(sort).skip(skip).limit(limit);
 
     ctx.body = {
       data: results,
@@ -71,5 +72,17 @@ module.exports = {
   async deleteOne(ctx) {
     const { id } = ctx.params;
     ctx.body = await FoodsModel.findByIdAndDelete(id);
+  },
+  async enableOne(ctx) {
+    const id = ctx.params.id;
+    await FoodsModel.findByIdAndUpdate(id, { online: true });
+
+    ctx.status = 204;
+  },
+  async disableOne(ctx) {
+    const id = ctx.params.id;
+    await FoodsModel.findByIdAndUpdate(id, { online: false });
+
+    ctx.status = 204;
   },
 };

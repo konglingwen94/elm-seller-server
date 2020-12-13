@@ -11,23 +11,24 @@ const FoodsSchema = new mongoose.Schema(
     info: String,
     menuID: ObjectId,
     image: String,
+    online: { type: Boolean, default: true },
   },
   {
     timestamps: true,
-    toJSON:{virtuals:true}
+    toJSON: { virtuals: true },
   }
 );
 
- FoodsSchema.virtual("ratings", {
+FoodsSchema.virtual("ratings", {
   ref: "Rating",
   localField: "_id",
   foreignField: "foodID",
 });
- FoodsSchema.virtual("category", {
+FoodsSchema.virtual("category", {
   ref: "Menu",
   localField: "menuID",
   foreignField: "_id",
-  justOne:true
+  justOne: true,
 });
- 
+
 module.exports = mongoose.model("Foods", FoodsSchema);
