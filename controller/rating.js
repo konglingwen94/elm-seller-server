@@ -7,7 +7,7 @@ module.exports = {
     const opts = resolveFilterOptions(pagination);
     const total = await RatingModel.countDocuments();
 
-    const data = await RatingModel.find().sort(opts.sort).skip(opts.skip).limit(opts.limit);
+    const data = await RatingModel.find().populate('food').sort(opts.sort).skip(opts.skip).limit(opts.limit);
     ctx.body = { data, pagination, total };
   },
   async queryAllList(ctx) {

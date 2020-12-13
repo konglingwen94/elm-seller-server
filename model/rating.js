@@ -14,7 +14,7 @@ const RatingSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    
+
     text: {
       type: String,
     },
@@ -27,13 +27,20 @@ const RatingSchema = new mongoose.Schema(
     score: {
       type: Number,
     },
-    foodID: { type: mongoose.Types.ObjectId, ref: "Food" },
+    foodID: { type: mongoose.Types.ObjectId, ref: "Foods" },
     recommend: [String],
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
   }
 );
- 
+
+RatingSchema.virtual("food", {
+  ref: "Foods",
+  localField: "foodID",
+  foreignField: "_id",
+  justOne: true,
+});
 
 module.exports = mongoose.model("Rating", RatingSchema);
