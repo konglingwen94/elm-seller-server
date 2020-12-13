@@ -7,7 +7,6 @@ const { secretKey, expiresIn } = require("../config/config.default.json");
 module.exports = {
   async queryList(ctx) {
     const level = ctx.state.adminInfo.level;
-    console.log(ctx.state);
     payload = { level: { $lte: level } };
     ctx.body = await AdministratorModel.find(payload);
   },
