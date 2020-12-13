@@ -93,6 +93,7 @@ router.get("/admin/seller", sellerController.queryOne);
 router.patch(
   "/admin/seller/:id",
   middleware.adminRequired(),
+  middleware.verifyParams({ ruleName: "seller" }),
   middleware.verifyPermission(),
 
   sellerController.updateOne

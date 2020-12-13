@@ -1,4 +1,3 @@
- 
 module.exports = {
   menu: {
     name: "string",
@@ -48,6 +47,15 @@ module.exports = {
       type: "string",
       required: true,
     },
-    
+  },
+  seller: {
+    avatar: "string",
+    bulletin: "string",
+    deliveryPrice: "integer",
+    infos: "array",
+    minPrice: "integer",
+    name: "string",
+    pics: "array",
+    supports: "array",
   },
 };
