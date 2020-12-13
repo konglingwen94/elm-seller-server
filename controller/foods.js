@@ -36,7 +36,7 @@ module.exports = {
 
     const total = await FoodsModel.countDocuments();
 
-    var results = await FoodsModel.find().sort(sort).skip(skip).limit(limit);
+    var results = await FoodsModel.find().populate('category').sort(sort).skip(skip).limit(limit);
 
     ctx.body = {
       data: results,

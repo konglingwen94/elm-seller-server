@@ -14,6 +14,7 @@ const FoodsSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON:{virtuals:true}
   }
 );
 
@@ -21,6 +22,12 @@ const FoodsSchema = new mongoose.Schema(
   ref: "Rating",
   localField: "_id",
   foreignField: "foodID",
+});
+ FoodsSchema.virtual("category", {
+  ref: "Menu",
+  localField: "menuID",
+  foreignField: "_id",
+  justOne:true
 });
  
 module.exports = mongoose.model("Foods", FoodsSchema);
