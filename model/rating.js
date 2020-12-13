@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 
 const RatingSchema = new mongoose.Schema(
   {
+
+
     rateType: {
       type: Number,
       required: true,
+      enum:[0,1]    // 0 是好评 ，1是差评
     },
     username: {
       type: String,
