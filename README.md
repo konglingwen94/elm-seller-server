@@ -21,49 +21,53 @@ git clone https://github.com/konglingwen94/elm-seller-server.git
 
 npm install
 
+```
+
+## 编写配置文件
+
+```js
+// 开发环境配置文件 config/config.local.json
+
+{
+  secretKey: '随机安全 key',
+  expiresIn:'token过期时间',  
+  // MongoDB configs.
+  mongodb: {
+    host: '127.0.0.1',
+    port: 27017,
+    database: '数据库名称',
+    username: '数据库账号',
+    password: '数据库密码',
+  },
+}
+```
+
+#### 3. 运行 API 服务
+
+```bash
+
 npm run dev // 开启一个热重载的开发环境服务器。默认端口为 `5000`
 
 npm run dev:debug // 开启一个热重载的可调式的开发环境服务器。默认端口为 `5000`
 
 npm run start  // 以后台模式开启服务器，生产环境使用
-```
 
-## 以 PM2 方式启动项目的配置文件 <https://github.com/konglingwen94/elm-seller-server/blob/master/ecosystem.config.js>
-
-```js
-module.exports = {
-  name: "elm-seller-server",
-  script: "./app.js",
-  log_date_format: "YYYY-MM-DD HH:mm:ss.SSS",
-  env: {
-    // 不指定环境变量的默认执行选项
-    PORT: 5000, // 配置启动服务器端口
-    NODE_ENV: "development",
-  },
-  env_production: {
-    // 生产环境变量
-    NODE_ENV: "production",
-  },
-};
-```
-## 项目配置文件  [/config/config.default.json](/config/config.default.json)
-
-```json
-{
-  "mongodb": {       // 数据库配置
-    "database": "elm-seller",
-    "host": "127.0.0.1",
-    "port": "27017",
-    "username": "",
-    "password": ""
-  },
-  "expiresIn": "2d",      // token有效期
-  "secretKey": "secretkey" // jwt 加密密钥
-}
-
+npm run stop # 停止运行 API 服务
 
 ```
 
+#### 4. 执行初始化数据库脚本
+
+```bash
+# 仅在第一次配置时执行， 默认创建超级管理员ROOT
+node scripts/init-admin.js  管理员用户名 管理员密码
+```
+
+```bash
+# 为了使客户端展示初始化数据，可以在服务启动后一次性初始化编辑好的json数据到数据库.如果不执行此操作，则需要在本项目提供服务的管理后台添加数据才可以  管理后天项目：<https://github.com/konglingwen94/vue-seller-admin>
+
+node scripts/init-database.js
+```
 
 ## 项目目录
 
