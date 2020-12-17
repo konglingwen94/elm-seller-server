@@ -5,7 +5,7 @@ const _ = require("lodash");
 const config = {
   dest: path.resolve(__dirname, "../../public/docs"),
 
-  base: "/elm-seller-server/public/docs/",
+  base: "/elm-seller-server/",
   title: "elm-seller-server", 
   themeConfig: {
     nav: [
