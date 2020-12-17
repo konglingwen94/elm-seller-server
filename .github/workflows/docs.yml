@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v1
       - run: npm ci
       - run: npm install vuepress
-      - run: npm run build
+      - run: npm run docs:build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
