@@ -1,7 +1,7 @@
 {
-  "name": "elm-sell-server",
+  "name": "elm-seller-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "koa+mongodb搭建的外卖商家服务端应用",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,8 +13,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["koa","node","mongoose","restful"],
+  "author": "konglingwen",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
