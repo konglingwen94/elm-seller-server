@@ -8,6 +8,7 @@
     "dev": "nodemon  app.js",
     "dev:debug": "nodemon --inspect  app.js",
     "start": "pm2 start  --env production",
+    "stop": "pm2 stop elm-seller-server",
     "restart": "pm2 restart elm-seller-server",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
