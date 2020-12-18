@@ -31,4 +31,4 @@ FoodsSchema.virtual("category", {
   justOne: true,
 });
 
-module.exports = mongoose.model("Foods", FoodsSchema);
+module.exports = mongoose.model("Food", FoodsSchema);

@@ -2,7 +2,7 @@ const Router = require("koa-router");
 
 const router = new Router({ prefix: "/api" });
 
-const FoodsController = require("../controller/foods");
+const FoodController = require("../controller/foods");
 const menuController = require("../controller/menu");
 const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
@@ -20,20 +20,20 @@ router.param("id", async (id, ctx, next) => {
   await next();
 });
 
-router.get("/admin/food-statistic", FoodsController.queryFoodStatistic);
+router.get("/admin/food-statistic", FoodController.queryFoodStatistic);
 
 router.delete(
   "/admin/foods/:id",
   middleware.adminRequired(),
   middleware.verifyPermission(),
 
-  FoodsController.deleteOne
+  FoodController.deleteOne
 );
 router.post(
   "/admin/foods",
   middleware.adminRequired(),
   middleware.verifyParams({ required: ["name", "price", "oldPrice", "image"], ruleName: "foods" }),
-  FoodsController.createOne
+  FoodController.createOne
 );
 
 router.patch(
@@ -43,15 +43,15 @@ router.patch(
 
   middleware.verifyParams({ ruleName: "foods" }),
 
-  FoodsController.updateOne
+  FoodController.updateOne
 );
-router.get("/admin/foods", FoodsController.queryListByOpts);
-router.get("/admin/foods/:id", FoodsController.queryById);
-router.patch("/admin/foods/:id/enable", FoodsController.enableOne);
-router.patch("/admin/foods/:id/disable", FoodsController.disableOne);
-router.get("/foods/:id", FoodsController.queryById);
+router.get("/admin/foods", FoodController.queryListByOpts);
+router.get("/admin/foods/:id", FoodController.queryById);
+router.patch("/admin/foods/:id/enable", FoodController.enableOne);
+router.patch("/admin/foods/:id/disable", FoodController.disableOne);
+router.get("/foods/:id", FoodController.queryById);
 
-router.get("/foods", FoodsController.queryList);
+router.get("/foods", FoodController.queryList);
 // 分类
 
 router.post(

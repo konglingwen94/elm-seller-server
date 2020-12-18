@@ -30,7 +30,7 @@ const RatingSchema = new mongoose.Schema(
     score: {
       type: Number,
     },
-    foodID: { type: mongoose.Types.ObjectId, ref: "Foods" },
+    foodID: { type: mongoose.Types.ObjectId, ref: "Food" },
     recommend: [String],
   },
   {
@@ -40,7 +40,7 @@ const RatingSchema = new mongoose.Schema(
 );
 
 RatingSchema.virtual("food", {
-  ref: "Foods",
+  ref: "Food",
   localField: "foodID",
   foreignField: "_id",
   justOne: true,
