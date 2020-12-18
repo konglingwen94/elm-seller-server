@@ -1,5 +1,5 @@
-const MenuModel = require("../model/menu");
-const FoodsModel = require("../model/foods");
+const MenuModel = require("../model/category");
+const FoodModel = require("../model/food");
 
 module.exports = {
   async queryList(ctx) {
@@ -34,7 +34,7 @@ module.exports = {
     const { id } = ctx.params;
 
     try {
-      var result = await FoodsModel.findOne({ menuID: id });
+      var result = await FoodModel.findOne({ menuID: id });
     } catch (error) {}
      
     if (result) {

@@ -2,8 +2,8 @@ const Router = require("koa-router");
 
 const router = new Router({ prefix: "/api" });
 
-const FoodController = require("../controller/foods");
-const menuController = require("../controller/menu");
+const FoodController = require("../controller/food");
+const CategoryController = require("../controller/category");
 const ratingController = require("../controller/rating");
 const sellerController = require("../controller/seller");
 const uploadController = require("../controller/upload");
@@ -59,23 +59,23 @@ router.post(
   middleware.adminRequired(),
   middleware.verifyParams({ required: ["name", "type"], ruleName: "menu" }),
 
-  menuController.createOne
+  CategoryController.createOne
 );
-router.get("/admin/menus", menuController.queryList);
+router.get("/admin/menus", CategoryController.queryList);
 router.delete(
   "/admin/menus/:id",
   middleware.adminRequired(),
   middleware.verifyPermission(),
-  menuController.deleteOne
+  CategoryController.deleteOne
 );
 router.patch(
   "/admin/menus/:id",
   middleware.adminRequired(),
   middleware.verifyPermission(),
-  menuController.updateOne
+  CategoryController.updateOne
 );
 
-router.get("/menus", menuController.queryList);
+router.get("/menus", CategoryController.queryList);
 // 商品评价
 
 router.get("/ratings", ratingController.queryAllList);

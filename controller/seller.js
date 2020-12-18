@@ -1,5 +1,5 @@
 const SellerModel = require("../model/seller");
-const FoodModel = require("../model/foods");
+const FoodModel = require("../model/food");
 module.exports = {
   async queryOne(ctx) {
     const totalFoods = await FoodModel.find();

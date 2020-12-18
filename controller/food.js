@@ -1,4 +1,4 @@
-const FoodsModel = require("../model/foods");
+const FoodModel = require("../model/food");
 const RatingModel = require("../model/rating");
 const { defaults, resolveFilterOptions, resolvePagination } = require("../helper/utils");
 
@@ -9,7 +9,7 @@ module.exports = {
 
     opt = resolveFilterOptions({ pageSize: opt.count, sort: { [opt.sort]: -1 } });
 
-    const result = await FoodsModel.find().populate("ratings").sort(opt.sort).skip(opt.skip).limit(opt.limit);
+    const result = await FoodModel.find().populate("ratings").sort(opt.sort).skip(opt.skip).limit(opt.limit);
 
     ctx.body = result.map((item) => {
       return {
@@ -26,7 +26,7 @@ module.exports = {
   async queryList(ctx) {
     const { sort } = resolveFilterOptions();
 
-    var results = await FoodsModel.find({online:true}).sort(sort);
+    var results = await FoodModel.find({online:true}).sort(sort);
 
     ctx.body = results;
   },
@@ -35,9 +35,9 @@ module.exports = {
 
     const { skip, limit, sort } = resolveFilterOptions({ page, pageSize });
 
-    const total = await FoodsModel.countDocuments();
+    const total = await FoodModel.countDocuments();
 
-    var results = await FoodsModel.find().populate("category").sort(sort).skip(skip).limit(limit);
+    var results = await FoodModel.find().populate("category").sort(sort).skip(skip).limit(limit);
 
     ctx.body = {
       data: results,
@@ -51,7 +51,7 @@ module.exports = {
   async queryById(ctx) {
     const { id } = ctx.params;
 
-    var result = await FoodsModel.findById(id);
+    var result = await FoodModel.findById(id);
 
     if (result) {
       var ratings = await RatingModel.find({ foodID: result.id });
@@ -62,26 +62,26 @@ module.exports = {
     ctx.body = result;
   },
   async createOne(ctx) {
-    ctx.body = await FoodsModel.create(ctx.request.body);
+    ctx.body = await FoodModel.create(ctx.request.body);
   },
   async updateOne(ctx) {
     const { id } = ctx.params;
     const payload = ctx.request.body;
-    ctx.body = await FoodsModel.findByIdAndUpdate(id, payload);
+    ctx.body = await FoodModel.findByIdAndUpdate(id, payload);
   },
   async deleteOne(ctx) {
     const { id } = ctx.params;
-    ctx.body = await FoodsModel.findByIdAndDelete(id);
+    ctx.body = await FoodModel.findByIdAndDelete(id);
   },
   async enableOne(ctx) {
     const id = ctx.params.id;
-    await FoodsModel.findByIdAndUpdate(id, { online: true });
+    await FoodModel.findByIdAndUpdate(id, { online: true });
 
     ctx.status = 204;
   },
   async disableOne(ctx) {
     const id = ctx.params.id;
-    await FoodsModel.findByIdAndUpdate(id, { online: false });
+    await FoodModel.findByIdAndUpdate(id, { online: false });
 
     ctx.status = 204;
   },

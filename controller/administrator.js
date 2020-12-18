@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const AdministratorModel = require("../model/administrator");
-const { omit, pick } = require("../helper/utils");
+const { omit, } = require("../helper/utils");
 const { secretKey, expiresIn } = require("../config/config.default.json");
 
 module.exports = {
