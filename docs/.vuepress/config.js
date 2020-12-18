@@ -6,7 +6,7 @@ const config = {
   dest: path.resolve(__dirname, "../../public/docs"),
 
   base: "/elm-seller-server/",
-  title: "elm-seller-server", 
+  title: "商家店铺", 
   themeConfig: {
     nav: [
       {

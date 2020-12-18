@@ -1,4 +1,4 @@
-# 管理员
+# 管理员表
 
 > Model名称:  Administrator
 
