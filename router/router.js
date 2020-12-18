@@ -135,7 +135,7 @@ router.patch(
   middleware.verifyParams({
     ruleName: "administrator",
     required: ["username"],
-    validateFileds: ["username"],
+    validateFields: ["username"],
   }),
   administratorController.updateAccount
 );
