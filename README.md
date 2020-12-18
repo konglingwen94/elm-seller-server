@@ -26,7 +26,7 @@ npm install
 ## 编写配置文件
 
 ```js
-// 开发环境配置文件 config/config.local.json
+// 开发环境配置文件 config/config.default.json
 
 {
   secretKey: '随机安全 key',
@@ -62,12 +62,18 @@ npm run stop # 停止运行 API 服务
 # 仅在第一次配置时执行， 默认创建超级管理员ROOT
 node scripts/init-admin.js  管理员用户名 管理员密码
 ```
+#### 5 执行初始化数据库静态数据脚本
 
 ```bash
-# 为了使客户端展示初始化数据，可以在服务启动后一次性初始化编辑好的json数据到数据库.如果不执行此操作，则需要在本项目提供服务的管理后台添加数据才可以  管理后天项目：<https://github.com/konglingwen94/vue-seller-admin>
+# 为了使客户端展示初始化数据，需要在服务启动后一次性初始化编辑好的json数据到数据库.
 
 node scripts/init-database.js
 ```
+
+:::tip 提示
+如果不执行此操作，则需要在本项目提供服务的管理后台添加数据后才能显示对应客户端应用的数据 管理后台线上地址：<http://123.56.124.33:5000/admin>
+:::
+
 
 ## 项目目录
 
@@ -76,8 +82,8 @@ node scripts/init-database.js
 │   ├── administrator.js
 │   ├── seller.js
 │   ├── rating.js
-│   ├── menu.js
-│   └── foods.js
+│   ├── category.js
+│   └── food.js
 ├── helper
 │   ├── validatorRules.json  // 参数验证规则
 │   ├── mongoose.js  // mongoose连接脚本
@@ -91,8 +97,8 @@ node scripts/init-database.js
 │   ├── administrator.js
 │   ├── seller.js
 │   ├── rating.js
-│   ├── menu.js
-│   └── foods.js
+│   ├── category.js
+│   └── food.js
 ├── config
 │   └── config.default.json  // 项目配置文件
 ├── router
