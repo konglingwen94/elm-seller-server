@@ -4,6 +4,14 @@
 
 `GET /admin/ratings`
 
+### Query String Parameters
+
+|   Field   |  Type  | Description  | Required |
+| :-------: | :----: | :----------: | :------: |
+|   page    | Number |   当前页数   |    No    |
+| pageSize | Number | 每页显示个数 |    No    |
+
+
 ### Response
 
 ```json
