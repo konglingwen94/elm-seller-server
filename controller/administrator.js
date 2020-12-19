@@ -55,7 +55,7 @@ module.exports = {
     if (!bcrypt.compareSync(password, result.password)) {
       ctx.status = 400;
 
-      return (ctx.body = { message: "用户名或密码错误" });
+      return (ctx.body = { message: "密码错误" });
     }
     const user = result.toObject();
     const token = jwt.sign(user, secretKey, { expiresIn });
