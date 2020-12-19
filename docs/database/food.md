@@ -1,6 +1,6 @@
 # 商品表
 
-> Model 名称： Foods
+> Model 名称： Food
 
 |    Field    |   Type   | Description |
 | :---------: | :------: | :---------: |
