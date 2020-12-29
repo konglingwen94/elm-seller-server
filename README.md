@@ -70,9 +70,9 @@ node scripts/init-admin.js  管理员用户名 管理员密码
 node scripts/init-database.js
 ```
 
-:::tip 提示
-如果不执行此操作，则需要在本项目提供服务的管理后台添加数据后才能显示对应客户端应用的数据 管理后台线上地址：<http://123.56.124.33:5000/admin>
-:::
+
+>如果不执行此操作，则需要在本项目提供服务的管理后台添加数据后才能显示对应客户端应用的数据 管理后台线上地址：<http://123.56.124.33:5000/admin>
+
 
 
 ## 项目目录
@@ -133,6 +133,13 @@ node scripts/init-database.js
 token生成 ：`jsonwebtoken`
 
 数据库密码加密 : `bcrypt.js`
+
+## 项目总结
+
+- [Koa+Mongodb 搭建商家店铺服务端项目总结](https://juejin.cn/post/6907803934031609863)
+- [Vue+ElementUI搭建商家店铺管理后台项目总结](https://juejin.cn/post/6906796790390095879)
+- [Vue全新技术栈重构黄老师饿了么商家应用](https://juejin.cn/post/6844904202624303118)
+
 ## 支持
 
 如果您觉得本项目还不错的话，请您动手点一下`star`，有了您的支持，我会有动力开源更多有趣的项目出来，谢谢！
