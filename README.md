@@ -1,12 +1,7 @@
 
-## 传送门
-
-前端项目：<https://github.com/konglingwen94/vue-elm-sell>
-
-管理后台: <https://github.com/konglingwen94/vue-seller-admin>
-
 
 # 项目配置
+
 
 ## 数据库环境
 
@@ -150,6 +145,14 @@ token生成 ：`jsonwebtoken`
 - [Koa+Mongodb 搭建商家店铺服务端项目总结](https://juejin.cn/post/6907803934031609863)
 - [Vue+ElementUI搭建商家店铺管理后台项目总结](https://juejin.cn/post/6906796790390095879)
 - [Vue全新技术栈重构黄老师饿了么商家应用](https://juejin.cn/post/6844904202624303118)
+
+
+## 传送门
+
+前端项目：<https://github.com/konglingwen94/vue-elm-seller>
+
+管理后台: <https://github.com/konglingwen94/vue-seller-admin>
+
 
 ## 支持
 
