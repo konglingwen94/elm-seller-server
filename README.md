@@ -1,18 +1,29 @@
-# elm-seller-server
-
-饿了么商家店铺项目的后端接口项目
-
-本项目是为前端项目<https://github.com/konglingwen94/vue-elm-sell>提供数据`API`服务的后端项目。
-
-运行此项目之前需要安装`node^10.x.x`和`mongodb^4.x`
-
-<!-- ## 项目运行环境 -->
 
 ## 传送门
 
 前端项目：<https://github.com/konglingwen94/vue-elm-sell>
 
 管理后台: <https://github.com/konglingwen94/vue-seller-admin>
+
+
+# 项目配置
+
+## 数据库环境
+
+### MongoDB
+
+- [官方文档](https://docs.mongodb.com/manual/introduction/)
+- [安装手册](https://docs.mongodb.com/manual/administration/install-on-linux/)
+
+## 服务端环境
+
+项目服务端基于 [nodejs.org](https://nodejs.org/) 进行开发。
+
+### 版本要求
+
+```
+>= 10.x
+```
 
 ## 安装
 
