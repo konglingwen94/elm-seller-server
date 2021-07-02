@@ -30,7 +30,7 @@ npm install
 
 {
   secretKey: '随机安全 key',
-  expiresIn:'token过期时间',  
+  expiresIn:'token过期时间',
   // MongoDB configs.
   mongodb: {
     host: '127.0.0.1',
@@ -62,6 +62,7 @@ npm run stop # 停止运行 API 服务
 # 仅在第一次配置时执行， 默认创建超级管理员ROOT
 node scripts/init-admin.js  管理员用户名 管理员密码
 ```
+
 #### 5 执行初始化数据库静态数据脚本
 
 ```bash
@@ -71,9 +72,8 @@ node scripts/init-database.js
 ```
 
 :::tip 提示
-如果不执行此操作，则需要在本项目提供服务的管理后台添加数据后才能显示对应客户端应用的数据 管理后台线上地址：<http://123.56.124.33:5000/admin>
+如果不执行此操作，则需要在本项目提供服务的管理后台添加数据后才能显示对应客户端应用的数据 管理后台线上地址：<http://123.57.204.48:5000/admin>
 :::
-
 
 ## 项目目录
 
@@ -130,9 +130,10 @@ node scripts/init-database.js
 
 单页应用路由请求路径回退中间件 : `koa2-connect-histroy-api-fallback`
 
-token生成 ：`jsonwebtoken`
+token 生成 ：`jsonwebtoken`
 
 数据库密码加密 : `bcrypt.js`
+
 ## 支持
 
 如果您觉得本项目还不错的话，请您动手点一下`star`，有了您的支持，我会有动力开源更多有趣的项目出来，谢谢！
