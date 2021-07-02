@@ -1,18 +1,24 @@
-# elm-seller-server
 
-饿了么商家店铺项目的后端接口项目
 
-本项目是为前端项目<https://github.com/konglingwen94/vue-elm-sell>提供数据`API`服务的后端项目。
+# 项目配置
 
-运行此项目之前需要安装`node^10.x.x`和`mongodb^4.x`
 
-<!-- ## 项目运行环境 -->
+## 数据库环境
 
-## 传送门
+### MongoDB
 
-前端项目：<https://github.com/konglingwen94/vue-elm-sell>
+- [官方文档](https://docs.mongodb.com/manual/introduction/)
+- [安装手册](https://docs.mongodb.com/manual/administration/install-on-linux/)
 
-管理后台: <https://github.com/konglingwen94/vue-seller-admin>
+## 服务端环境
+
+项目服务端基于 [nodejs.org](https://nodejs.org/) 进行开发。
+
+### 版本要求
+
+```
+>= 10.x
+```
 
 ## 安装
 
@@ -134,6 +140,23 @@ token 生成 ：`jsonwebtoken`
 
 数据库密码加密 : `bcrypt.js`
 
+<<<<<<< HEAD
+=======
+## 项目总结
+
+- [Koa+Mongodb 搭建商家店铺服务端项目总结](https://juejin.cn/post/6907803934031609863)
+- [Vue+ElementUI搭建商家店铺管理后台项目总结](https://juejin.cn/post/6906796790390095879)
+- [Vue全新技术栈重构黄老师饿了么商家应用](https://juejin.cn/post/6844904202624303118)
+
+
+## 传送门
+
+前端项目：<https://github.com/konglingwen94/vue-elm-seller>
+
+管理后台: <https://github.com/konglingwen94/vue-seller-admin>
+
+
+>>>>>>> f3a49406c90f08f0bf0a92d68c45a43708751833
 ## 支持
 
-如果您觉得本项目还不错的话，请您动手点一下`star`，有了您的支持，我会有动力开源更多有趣的项目出来，谢谢！
+如果您觉得本项目还不错的话，请您动手点一下`star`，有了您的支持，我会有动力开源更多有趣的项目出来，谢谢！ 
